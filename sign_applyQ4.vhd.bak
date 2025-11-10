@@ -1,0 +1,33 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity sign_applyQ4 is
+  port(
+    i_Q4_mag    : in  std_logic_vector(3 downto 0);  -- |Q| (4-bit magnitude)
+    i_neg       : in  std_logic;                     -- 1 => negative quotient
+    o_Q4_signed : out std_logic_vector(3 downto 0)   -- 4-bit two's-comp quotient
+  );
+end entity;
+
+architecture rtl of sign_applyQ4 is
+begin
+  process(i_Q4_mag, i_neg)
+    variable m   : unsigned(3 downto 0);
+    variable sgn : signed(3 downto 0);
+  begin
+    -- magnitude as unsigned
+    m := unsigned(i_Q4_mag);
+
+    -- convert to signed
+    sgn := signed(std_logic_vector(m));
+
+    -- apply sign
+    if i_neg = '1' then
+      sgn := -sgn;
+    end if;
+
+    -- output two's complement
+    o_Q4_signed <= std_logic_vector(sgn);
+  end process;
+end architecture;

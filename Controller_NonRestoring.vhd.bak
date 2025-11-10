@@ -1,0 +1,201 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity Controller_NonRestoring is
+  port(
+    -- clock/reset
+    i_clock     : in  std_logic;
+    i_resetBar  : in  std_logic;
+
+    -- start/done
+    i_start     : in  std_logic;
+    o_done      : out std_logic;
+
+    -- status from datapath
+    i_msb_R     : in  std_logic;  -- R sign for decision
+    i_N_is_zero : in  std_logic;  -- loop counter empty
+    i_signQ_lat : in  std_logic;  -- latched sign of quotient
+    i_signR_lat : in  std_logic;  -- latched sign of remainder
+
+    -- control to datapath
+    -- Q
+    o_ctrl_selQ_1      : out std_logic;
+    o_ctrl_selQ_0      : out std_logic;
+    o_ctrl_absQ        : out std_logic;
+    o_ctrl_setQlsb     : out std_logic;
+    o_Qlsb_in          : out std_logic;
+
+    -- D
+    o_ctrl_selD_1      : out std_logic;
+    o_ctrl_selD_0      : out std_logic;
+    o_ctrl_absD        : out std_logic;
+
+    -- R
+    o_ctrl_selR_1      : out std_logic;
+    o_ctrl_selR_0      : out std_logic;
+    o_ctrl_R_load_zero : out std_logic;
+
+    -- signs latch enables
+    o_ctrl_enSignQ     : out std_logic;
+    o_ctrl_enSignR     : out std_logic;
+
+    -- adder
+    o_ctrl_sub         : out std_logic;
+
+    -- N
+    o_ctrl_selN_1      : out std_logic;
+    o_ctrl_selN_0      : out std_logic;
+
+    -- publish
+    o_ctrl_Load_Q_mag    : out std_logic;
+    o_ctrl_Handle_Q_Sign : out std_logic;
+    o_ctrl_Load_R_mag    : out std_logic;
+    o_ctrl_Handle_R_Sign : out std_logic
+  );
+end Controller_NonRestoring;
+
+architecture fsm of Controller_NonRestoring is
+  type state_t is (
+    S_IDLE, S_LATCH_LOAD, S_SHIFT, S_DECIDE, S_DEC_NCHK, S_RESTORE, S_PUBLISH, S_DONE
+  );
+  signal ps, ns : state_t;
+
+  constant HOLD : std_logic_vector(1 downto 0) := "00";
+  constant LOAD : std_logic_vector(1 downto 0) := "01";
+  constant ACT  : std_logic_vector(1 downto 0) := "10"; -- "1x"
+begin
+  -- state reg
+  process(i_clock, i_resetBar)
+  begin
+    if i_resetBar = '0' then
+      ps <= S_IDLE;
+    elsif rising_edge(i_clock) then
+      ps <= ns;
+    end if;
+  end process;
+
+  -- outputs + next-state
+  process(ps, i_start, i_msb_R, i_N_is_zero, i_signQ_lat, i_signR_lat)
+    variable selQ  : std_logic_vector(1 downto 0) := HOLD;
+    variable selD  : std_logic_vector(1 downto 0) := HOLD;
+    variable selR  : std_logic_vector(1 downto 0) := HOLD;
+    variable selN  : std_logic_vector(1 downto 0) := HOLD;
+    variable absQ  : std_logic := '0';
+    variable absD  : std_logic := '0';
+    variable setQL : std_logic := '0';
+    variable qlsb  : std_logic := '0';
+    variable ldR0  : std_logic := '0';
+    variable enSQ  : std_logic := '0';
+    variable enSR  : std_logic := '0';
+    variable subop : std_logic := '0';
+    variable ldQm  : std_logic := '0';
+    variable hQ    : std_logic := '0';
+    variable ldRm  : std_logic := '0';
+    variable hR    : std_logic := '0';
+    variable done  : std_logic := '0';
+  begin
+    -- defaults
+    ns := ps;
+
+    case ps is
+      when S_IDLE =>
+        if i_start = '1' then ns := S_LATCH_LOAD; end if;
+
+      when S_LATCH_LOAD =>
+        -- latch input signs one cycle
+        enSQ := '1';
+        enSR := '1';
+        -- load |Q| and |D|
+        selQ := LOAD;   -- |Dividend| comes from datapath
+        selD := LOAD;   -- load D then abs it
+        absD := '1';
+        -- clear R
+        selR := LOAD;
+        ldR0 := '1';
+        -- load N
+        selN := LOAD;
+        ns   := S_SHIFT;
+
+      when S_SHIFT =>
+        selQ := ACT;    -- Q arith left shift
+        selR := ACT;    -- R logical left shift
+        ns   := S_DECIDE;
+
+      when S_DECIDE =>
+        -- decide by sign of R after shift
+        selR := LOAD;       -- load adder result
+        if i_msb_R = '0' then
+          -- R >= 0 : R := R - D ; QLSB=1
+          subop := '1';
+          setQL := '1';
+          qlsb  := '1';
+        else
+          -- R < 0  : R := R + D ; QLSB=0
+          subop := '0';
+          setQL := '1';
+          qlsb  := '0';
+        end if;
+        ns := S_DEC_NCHK;
+
+      when S_DEC_NCHK =>
+        selN := ACT;           -- decrement N
+        if i_N_is_zero = '1' then
+          ns := S_RESTORE;
+        else
+          ns := S_SHIFT;
+        end if;
+
+      when S_RESTORE =>
+        -- optional restore once if R<0
+        if i_msb_R = '1' then
+          selR  := LOAD;
+          subop := '0';        -- R := R + D
+        end if;
+        ns := S_PUBLISH;
+
+      when S_PUBLISH =>
+        -- load outputs
+        ldQm := '1';
+        ldRm := '1';
+        -- apply signs ONLY if latched signs were 1
+        hQ   := i_signQ_lat;
+        hR   := i_signR_lat;
+        ns   := S_DONE;
+
+      when S_DONE =>
+        done := '1';
+        ns   := S_IDLE;
+    end case;
+
+    -- drive outputs
+    o_ctrl_selQ_1      <= selQ(1);
+    o_ctrl_selQ_0      <= selQ(0);
+    o_ctrl_absQ        <= absQ;
+    o_ctrl_setQlsb     <= setQL;
+    o_Qlsb_in          <= qlsb;
+
+    o_ctrl_selD_1      <= selD(1);
+    o_ctrl_selD_0      <= selD(0);
+    o_ctrl_absD        <= absD;
+
+    o_ctrl_selR_1      <= selR(1);
+    o_ctrl_selR_0      <= selR(0);
+    o_ctrl_R_load_zero <= ldR0;
+
+    o_ctrl_enSignQ     <= enSQ;
+    o_ctrl_enSignR     <= enSR;
+
+    o_ctrl_sub         <= subop;
+
+    o_ctrl_selN_1      <= selN(1);
+    o_ctrl_selN_0      <= selN(0);
+
+    o_ctrl_Load_Q_mag    <= ldQm;
+    o_ctrl_Handle_Q_Sign <= hQ;
+    o_ctrl_Load_R_mag    <= ldRm;
+    o_ctrl_Handle_R_Sign <= hR;
+
+    o_done <= done;
+  end process;
+end fsm;

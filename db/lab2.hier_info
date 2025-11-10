@@ -1,0 +1,2274 @@
+|ALU
+CarryOut <= adder_subtractor:inst.o_Carry_out
+OpSel[0] => inst6.IN0
+OpSel[0] => Mux4_1_8bits:inst22.i_sel_0
+OpSel[0] => inst15.IN0
+OpSel[0] => inst19.IN0
+OpSel[0] => inst24.IN0
+OpSel[0] => inst14.IN0
+OpSel[1] => inst7.IN0
+OpSel[1] => Mux4_1_8bits:inst22.i_sel_1
+OpSel[1] => inst16.IN0
+OpSel[1] => inst18.IN1
+OpSel[1] => inst24.IN1
+OpSel[1] => inst17.IN0
+OperandA[0] => adder_subtractor:inst.i_A_v[0]
+OperandA[0] => Multiplication:inst2.int_Multiplicand[0]
+OperandA[0] => Division_non_restoring:inst1.int_Dividend[0]
+OperandA[1] => adder_subtractor:inst.i_A_v[1]
+OperandA[1] => Multiplication:inst2.int_Multiplicand[1]
+OperandA[1] => Division_non_restoring:inst1.int_Dividend[1]
+OperandA[2] => adder_subtractor:inst.i_A_v[2]
+OperandA[2] => Multiplication:inst2.int_Multiplicand[2]
+OperandA[2] => Division_non_restoring:inst1.int_Dividend[2]
+OperandA[3] => adder_subtractor:inst.i_A_v[3]
+OperandA[3] => Multiplication:inst2.int_Multiplicand[3]
+OperandA[3] => Division_non_restoring:inst1.int_Dividend[3]
+OperandB[0] => adder_subtractor:inst.i_B_v[0]
+OperandB[0] => Multiplication:inst2.int_Multiplier[0]
+OperandB[0] => Division_non_restoring:inst1.int_Divisor[0]
+OperandB[1] => adder_subtractor:inst.i_B_v[1]
+OperandB[1] => Multiplication:inst2.int_Multiplier[1]
+OperandB[1] => Division_non_restoring:inst1.int_Divisor[1]
+OperandB[2] => adder_subtractor:inst.i_B_v[2]
+OperandB[2] => Multiplication:inst2.int_Multiplier[2]
+OperandB[2] => Division_non_restoring:inst1.int_Divisor[2]
+OperandB[3] => adder_subtractor:inst.i_B_v[3]
+OperandB[3] => Multiplication:inst2.int_Multiplier[3]
+OperandB[3] => Division_non_restoring:inst1.int_Divisor[3]
+OverflowOut <= adder_subtractor:inst.o_overFlow
+ZeroOut <= inst21.DB_MAX_OUTPUT_PORT_TYPE
+GClock => Multiplication:inst2.GClock
+GClock => Division_non_restoring:inst1.Gclock
+GClock => StartPulse_OnReset:inst12.i_clock
+GClock => eightBitRegister:inst5.i_clock
+GReset => Multiplication:inst2.GReset
+GReset => Division_non_restoring:inst1.Greset
+GReset => StartPulse_OnReset:inst12.i_resetBar
+GReset => eightBitRegister:inst5.i_resetBar
+OUT[0] <= eightBitRegister:inst5.o_Value[0]
+OUT[1] <= eightBitRegister:inst5.o_Value[1]
+OUT[2] <= eightBitRegister:inst5.o_Value[2]
+OUT[3] <= eightBitRegister:inst5.o_Value[3]
+OUT[4] <= eightBitRegister:inst5.o_Value[4]
+OUT[5] <= eightBitRegister:inst5.o_Value[5]
+OUT[6] <= eightBitRegister:inst5.o_Value[6]
+OUT[7] <= eightBitRegister:inst5.o_Value[7]
+
+
+|ALU|adder_subtractor:inst
+i_A_v[0] => RippleAdder:RP.i_A_vect[0]
+i_A_v[1] => RippleAdder:RP.i_A_vect[1]
+i_A_v[2] => RippleAdder:RP.i_A_vect[2]
+i_A_v[3] => RippleAdder:RP.i_A_vect[3]
+i_B_v[0] => int_B_xor[0].IN0
+i_B_v[1] => int_B_xor[1].IN0
+i_B_v[2] => int_B_xor[2].IN0
+i_B_v[3] => int_B_xor[3].IN0
+i_Carry_in => int_B_xor[0].IN1
+i_Carry_in => int_B_xor[1].IN1
+i_Carry_in => int_B_xor[2].IN1
+i_Carry_in => int_B_xor[3].IN1
+i_Carry_in => RippleAdder:RP.i_Cin
+o_Carry_out <= RippleAdder:RP.o_Cout
+o_Zero <= o_Zero.DB_MAX_OUTPUT_PORT_TYPE
+o_overFlow <= RippleAdder:RP.o_overFlow
+o_Sum_vect[0] <= RippleAdder:RP.o_Sum_vect[0]
+o_Sum_vect[1] <= RippleAdder:RP.o_Sum_vect[1]
+o_Sum_vect[2] <= RippleAdder:RP.o_Sum_vect[2]
+o_Sum_vect[3] <= RippleAdder:RP.o_Sum_vect[3]
+
+
+|ALU|adder_subtractor:inst|RippleAdder:RP
+i_A_vect[0] => full_adder:FA_0.i_A
+i_A_vect[1] => full_adder:FA_1.i_A
+i_A_vect[2] => full_adder:FA_2.i_A
+i_A_vect[3] => full_adder:FA_3.i_A
+i_B_vect[0] => full_adder:FA_0.i_B
+i_B_vect[1] => full_adder:FA_1.i_B
+i_B_vect[2] => full_adder:FA_2.i_B
+i_B_vect[3] => full_adder:FA_3.i_B
+i_Cin => full_adder:FA_0.i_Carry_in
+o_Sum_vect[0] <= full_adder:FA_0.o_Sum
+o_Sum_vect[1] <= full_adder:FA_1.o_Sum
+o_Sum_vect[2] <= full_adder:FA_2.o_Sum
+o_Sum_vect[3] <= full_adder:FA_3.o_Sum
+o_Cout <= full_adder:FA_3.O_Carry_out
+o_overFlow <= o_overFlow.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|adder_subtractor:inst|RippleAdder:RP|full_adder:FA_0
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|adder_subtractor:inst|RippleAdder:RP|full_adder:FA_1
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|adder_subtractor:inst|RippleAdder:RP|full_adder:FA_2
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|adder_subtractor:inst|RippleAdder:RP|full_adder:FA_3
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst3
+i_Ai[0] => oneBitComparator:comp0.i_Ai
+i_Ai[1] => oneBitComparator:comp1.i_Ai
+i_Ai[2] => oneBitComparator:comp2.i_Ai
+i_Ai[3] => oneBitComparator:comp3.i_Ai
+i_Bi[0] => oneBitComparator:comp0.i_Bi
+i_Bi[1] => oneBitComparator:comp1.i_Bi
+i_Bi[2] => oneBitComparator:comp2.i_Bi
+i_Bi[3] => oneBitComparator:comp3.i_Bi
+o_GT <= oneBitComparator:comp0.o_GT
+o_LT <= oneBitComparator:comp0.o_LT
+o_EQ <= o_EQ.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst3|oneBitComparator:comp3
+i_GTPrevious => int_GT2.IN0
+i_GTPrevious => int_GT1.IN0
+i_GTPrevious => int_LT2.IN0
+i_LTPrevious => int_LT2.IN1
+i_LTPrevious => int_GT1.IN1
+i_LTPrevious => int_GT2.IN1
+i_Ai => int_GT1.IN1
+i_Ai => int_LT1.IN1
+i_Bi => int_LT1.IN1
+i_Bi => int_GT1.IN1
+o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
+o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst3|oneBitComparator:comp2
+i_GTPrevious => int_GT2.IN0
+i_GTPrevious => int_GT1.IN0
+i_GTPrevious => int_LT2.IN0
+i_LTPrevious => int_LT2.IN1
+i_LTPrevious => int_GT1.IN1
+i_LTPrevious => int_GT2.IN1
+i_Ai => int_GT1.IN1
+i_Ai => int_LT1.IN1
+i_Bi => int_LT1.IN1
+i_Bi => int_GT1.IN1
+o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
+o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst3|oneBitComparator:comp1
+i_GTPrevious => int_GT2.IN0
+i_GTPrevious => int_GT1.IN0
+i_GTPrevious => int_LT2.IN0
+i_LTPrevious => int_LT2.IN1
+i_LTPrevious => int_GT1.IN1
+i_LTPrevious => int_GT2.IN1
+i_Ai => int_GT1.IN1
+i_Ai => int_LT1.IN1
+i_Bi => int_LT1.IN1
+i_Bi => int_GT1.IN1
+o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
+o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst3|oneBitComparator:comp0
+i_GTPrevious => int_GT2.IN0
+i_GTPrevious => int_GT1.IN0
+i_GTPrevious => int_LT2.IN0
+i_LTPrevious => int_LT2.IN1
+i_LTPrevious => int_GT1.IN1
+i_LTPrevious => int_GT2.IN1
+i_Ai => int_GT1.IN1
+i_Ai => int_LT1.IN1
+i_Bi => int_LT1.IN1
+i_Bi => int_GT1.IN1
+o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
+o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22
+i_val_0[0] => Mux2_1:gen_bits:0:Mux2_1_1k.i_val_0
+i_val_0[1] => Mux2_1:gen_bits:1:Mux2_1_1k.i_val_0
+i_val_0[2] => Mux2_1:gen_bits:2:Mux2_1_1k.i_val_0
+i_val_0[3] => Mux2_1:gen_bits:3:Mux2_1_1k.i_val_0
+i_val_0[4] => Mux2_1:gen_bits:4:Mux2_1_1k.i_val_0
+i_val_0[5] => Mux2_1:gen_bits:5:Mux2_1_1k.i_val_0
+i_val_0[6] => Mux2_1:gen_bits:6:Mux2_1_1k.i_val_0
+i_val_0[7] => Mux2_1:gen_bits:7:Mux2_1_1k.i_val_0
+i_val_1[0] => Mux2_1:gen_bits:0:Mux2_1_1k.i_val_1
+i_val_1[1] => Mux2_1:gen_bits:1:Mux2_1_1k.i_val_1
+i_val_1[2] => Mux2_1:gen_bits:2:Mux2_1_1k.i_val_1
+i_val_1[3] => Mux2_1:gen_bits:3:Mux2_1_1k.i_val_1
+i_val_1[4] => Mux2_1:gen_bits:4:Mux2_1_1k.i_val_1
+i_val_1[5] => Mux2_1:gen_bits:5:Mux2_1_1k.i_val_1
+i_val_1[6] => Mux2_1:gen_bits:6:Mux2_1_1k.i_val_1
+i_val_1[7] => Mux2_1:gen_bits:7:Mux2_1_1k.i_val_1
+i_val_2[0] => Mux2_1:gen_bits:0:Mux2_1_2k.i_val_0
+i_val_2[1] => Mux2_1:gen_bits:1:Mux2_1_2k.i_val_0
+i_val_2[2] => Mux2_1:gen_bits:2:Mux2_1_2k.i_val_0
+i_val_2[3] => Mux2_1:gen_bits:3:Mux2_1_2k.i_val_0
+i_val_2[4] => Mux2_1:gen_bits:4:Mux2_1_2k.i_val_0
+i_val_2[5] => Mux2_1:gen_bits:5:Mux2_1_2k.i_val_0
+i_val_2[6] => Mux2_1:gen_bits:6:Mux2_1_2k.i_val_0
+i_val_2[7] => Mux2_1:gen_bits:7:Mux2_1_2k.i_val_0
+i_val_3[0] => Mux2_1:gen_bits:0:Mux2_1_2k.i_val_1
+i_val_3[1] => Mux2_1:gen_bits:1:Mux2_1_2k.i_val_1
+i_val_3[2] => Mux2_1:gen_bits:2:Mux2_1_2k.i_val_1
+i_val_3[3] => Mux2_1:gen_bits:3:Mux2_1_2k.i_val_1
+i_val_3[4] => Mux2_1:gen_bits:4:Mux2_1_2k.i_val_1
+i_val_3[5] => Mux2_1:gen_bits:5:Mux2_1_2k.i_val_1
+i_val_3[6] => Mux2_1:gen_bits:6:Mux2_1_2k.i_val_1
+i_val_3[7] => Mux2_1:gen_bits:7:Mux2_1_2k.i_val_1
+i_sel_0 => Mux2_1:gen_bits:7:Mux2_1_1k.i_sel
+i_sel_0 => Mux2_1:gen_bits:7:Mux2_1_2k.i_sel
+i_sel_0 => Mux2_1:gen_bits:6:Mux2_1_1k.i_sel
+i_sel_0 => Mux2_1:gen_bits:6:Mux2_1_2k.i_sel
+i_sel_0 => Mux2_1:gen_bits:5:Mux2_1_1k.i_sel
+i_sel_0 => Mux2_1:gen_bits:5:Mux2_1_2k.i_sel
+i_sel_0 => Mux2_1:gen_bits:4:Mux2_1_1k.i_sel
+i_sel_0 => Mux2_1:gen_bits:4:Mux2_1_2k.i_sel
+i_sel_0 => Mux2_1:gen_bits:3:Mux2_1_1k.i_sel
+i_sel_0 => Mux2_1:gen_bits:3:Mux2_1_2k.i_sel
+i_sel_0 => Mux2_1:gen_bits:2:Mux2_1_1k.i_sel
+i_sel_0 => Mux2_1:gen_bits:2:Mux2_1_2k.i_sel
+i_sel_0 => Mux2_1:gen_bits:1:Mux2_1_1k.i_sel
+i_sel_0 => Mux2_1:gen_bits:1:Mux2_1_2k.i_sel
+i_sel_0 => Mux2_1:gen_bits:0:Mux2_1_1k.i_sel
+i_sel_0 => Mux2_1:gen_bits:0:Mux2_1_2k.i_sel
+i_sel_1 => Mux2_1:gen_bits:7:Mux2_1_3k.i_sel
+i_sel_1 => Mux2_1:gen_bits:6:Mux2_1_3k.i_sel
+i_sel_1 => Mux2_1:gen_bits:5:Mux2_1_3k.i_sel
+i_sel_1 => Mux2_1:gen_bits:4:Mux2_1_3k.i_sel
+i_sel_1 => Mux2_1:gen_bits:3:Mux2_1_3k.i_sel
+i_sel_1 => Mux2_1:gen_bits:2:Mux2_1_3k.i_sel
+i_sel_1 => Mux2_1:gen_bits:1:Mux2_1_3k.i_sel
+i_sel_1 => Mux2_1:gen_bits:0:Mux2_1_3k.i_sel
+o_val[0] <= Mux2_1:gen_bits:0:Mux2_1_3k.o_val
+o_val[1] <= Mux2_1:gen_bits:1:Mux2_1_3k.o_val
+o_val[2] <= Mux2_1:gen_bits:2:Mux2_1_3k.o_val
+o_val[3] <= Mux2_1:gen_bits:3:Mux2_1_3k.o_val
+o_val[4] <= Mux2_1:gen_bits:4:Mux2_1_3k.o_val
+o_val[5] <= Mux2_1:gen_bits:5:Mux2_1_3k.o_val
+o_val[6] <= Mux2_1:gen_bits:6:Mux2_1_3k.o_val
+o_val[7] <= Mux2_1:gen_bits:7:Mux2_1_3k.o_val
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:7:Mux2_1_1k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:7:Mux2_1_2k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:7:Mux2_1_3k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:6:Mux2_1_1k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:6:Mux2_1_2k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:6:Mux2_1_3k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:5:Mux2_1_1k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:5:Mux2_1_2k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:5:Mux2_1_3k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:4:Mux2_1_1k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:4:Mux2_1_2k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:4:Mux2_1_3k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:3:Mux2_1_1k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:3:Mux2_1_2k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:3:Mux2_1_3k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:2:Mux2_1_1k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:2:Mux2_1_2k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:2:Mux2_1_3k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:1:Mux2_1_1k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:1:Mux2_1_2k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:1:Mux2_1_3k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:0:Mux2_1_1k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:0:Mux2_1_2k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:0:Mux2_1_3k
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2
+zeroFlag <= Booth_Datapath:inst5.o_A_zero
+GClock => Booth_Datapath:inst5.i_clock
+GClock => Multiplication_Control_Logic_One_Hot:inst.i_clock
+GReset => Booth_Datapath:inst5.i_resetBar
+GReset => Multiplication_Control_Logic_One_Hot:inst.i_resetBar
+int_Multiplicand[0] => Booth_Datapath:inst5.i_Multiplicand[0]
+int_Multiplicand[1] => Booth_Datapath:inst5.i_Multiplicand[1]
+int_Multiplicand[2] => Booth_Datapath:inst5.i_Multiplicand[2]
+int_Multiplicand[3] => Booth_Datapath:inst5.i_Multiplicand[3]
+int_Multiplier[0] => Booth_Datapath:inst5.i_Multiplier[0]
+int_Multiplier[1] => Booth_Datapath:inst5.i_Multiplier[1]
+int_Multiplier[2] => Booth_Datapath:inst5.i_Multiplier[2]
+int_Multiplier[3] => Booth_Datapath:inst5.i_Multiplier[3]
+N[0] => Booth_Datapath:inst5.i_N_init[0]
+N[1] => Booth_Datapath:inst5.i_N_init[1]
+N[2] => Booth_Datapath:inst5.i_N_init[2]
+N[3] => Booth_Datapath:inst5.i_N_init[3]
+overflow <= Booth_Datapath:inst5.o_overflow
+Done <= Multiplication_Control_Logic_One_Hot:inst.o_done
+DoneCounting <= Counter.DB_MAX_OUTPUT_PORT_TYPE
+Ac[0] <= Booth_Datapath:inst5.o_A[0]
+Ac[1] <= Booth_Datapath:inst5.o_A[1]
+Ac[2] <= Booth_Datapath:inst5.o_A[2]
+Ac[3] <= Booth_Datapath:inst5.o_A[3]
+Multiplier[0] <= Booth_Datapath:inst5.o_Q[0]
+Multiplier[1] <= Booth_Datapath:inst5.o_Q[1]
+Multiplier[2] <= Booth_Datapath:inst5.o_Q[2]
+Multiplier[3] <= Booth_Datapath:inst5.o_Q[3]
+Product[0] <= Booth_Datapath:inst5.o_Product[0]
+Product[1] <= Booth_Datapath:inst5.o_Product[1]
+Product[2] <= Booth_Datapath:inst5.o_Product[2]
+Product[3] <= Booth_Datapath:inst5.o_Product[3]
+Product[4] <= Booth_Datapath:inst5.o_Product[4]
+Product[5] <= Booth_Datapath:inst5.o_Product[5]
+Product[6] <= Booth_Datapath:inst5.o_Product[6]
+Product[7] <= Booth_Datapath:inst5.o_Product[7]
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5
+i_clock => fourBitRegister:M_reg.i_clock
+i_clock => Right_Shift_four_bit_register:A_reg.i_clock
+i_clock => Logical_Right_Shift_four_bit_register:Q_reg.i_clock
+i_clock => enARdFF_2:Q1ff.i_clock
+i_clock => fourBitRegister_LoadHoldDec:N_cnt.i_clock
+i_clock => fourBitRegister:ProdHi.i_clock
+i_clock => fourBitRegister:ProdLo.i_clock
+i_resetBar => fourBitRegister:M_reg.i_resetBar
+i_resetBar => Right_Shift_four_bit_register:A_reg.i_resetBar
+i_resetBar => Logical_Right_Shift_four_bit_register:Q_reg.i_resetBar
+i_resetBar => enARdFF_2:Q1ff.i_resetBar
+i_resetBar => fourBitRegister_LoadHoldDec:N_cnt.i_resetBar
+i_resetBar => fourBitRegister:ProdHi.i_resetBar
+i_resetBar => fourBitRegister:ProdLo.i_resetBar
+i_Multiplicand[0] => fourBitRegister:M_reg.i_Value[0]
+i_Multiplicand[1] => fourBitRegister:M_reg.i_Value[1]
+i_Multiplicand[2] => fourBitRegister:M_reg.i_Value[2]
+i_Multiplicand[3] => fourBitRegister:M_reg.i_Value[3]
+i_Multiplier[0] => Logical_Right_Shift_four_bit_register:Q_reg.i_Value[0]
+i_Multiplier[1] => Logical_Right_Shift_four_bit_register:Q_reg.i_Value[1]
+i_Multiplier[2] => Logical_Right_Shift_four_bit_register:Q_reg.i_Value[2]
+i_Multiplier[3] => Logical_Right_Shift_four_bit_register:Q_reg.i_Value[3]
+ctrl_loadM => fourBitRegister:M_reg.i_load
+ctrl_selA_1 => Right_Shift_four_bit_register:A_reg.i_sel_1
+ctrl_selA_0 => Right_Shift_four_bit_register:A_reg.i_sel_0
+ctrl_A_load_zero => Mux2_1:A_mux3.i_sel
+ctrl_A_load_zero => Mux2_1:A_mux2.i_sel
+ctrl_A_load_zero => Mux2_1:A_mux1.i_sel
+ctrl_A_load_zero => Mux2_1:A_mux0.i_sel
+ctrl_selQ_1 => Logical_Right_Shift_four_bit_register:Q_reg.i_sel_1
+ctrl_selQ_0 => Logical_Right_Shift_four_bit_register:Q_reg.i_sel_0
+ctrl_enQ1 => enARdFF_2:Q1ff.i_enable
+ctrl_sub => adder_subtractor:U_ADD.i_Carry_in
+ctrl_selN_1 => fourBitRegister_LoadHoldDec:N_cnt.i_sel_1
+ctrl_selN_0 => fourBitRegister_LoadHoldDec:N_cnt.i_sel_0
+i_N_init[0] => fourBitRegister_LoadHoldDec:N_cnt.i_Value[0]
+i_N_init[1] => fourBitRegister_LoadHoldDec:N_cnt.i_Value[1]
+i_N_init[2] => fourBitRegister_LoadHoldDec:N_cnt.i_Value[2]
+i_N_init[3] => fourBitRegister_LoadHoldDec:N_cnt.i_Value[3]
+ctrl_latchProduct => fourBitRegister:ProdHi.i_load
+ctrl_latchProduct => fourBitRegister:ProdLo.i_load
+o_lsbQ0 <= Logical_Right_Shift_four_bit_register:Q_reg.o_value_lsb
+o_FFQ1 <= enARdFF_2:Q1ff.o_q
+o_N_is_zero <= fourBitRegister_LoadHoldDec:N_cnt.o_zero
+o_A_zero <= adder_subtractor:U_ADD.o_Zero
+o_overflow <= adder_subtractor:U_ADD.o_overFlow
+o_A[0] <= Right_Shift_four_bit_register:A_reg.o_Value[0]
+o_A[1] <= Right_Shift_four_bit_register:A_reg.o_Value[1]
+o_A[2] <= Right_Shift_four_bit_register:A_reg.o_Value[2]
+o_A[3] <= Right_Shift_four_bit_register:A_reg.o_Value[3]
+o_Q[0] <= Logical_Right_Shift_four_bit_register:Q_reg.o_Value[0]
+o_Q[1] <= Logical_Right_Shift_four_bit_register:Q_reg.o_Value[1]
+o_Q[2] <= Logical_Right_Shift_four_bit_register:Q_reg.o_Value[2]
+o_Q[3] <= Logical_Right_Shift_four_bit_register:Q_reg.o_Value[3]
+o_Product[0] <= fourBitRegister:ProdLo.o_Value[0]
+o_Product[1] <= fourBitRegister:ProdLo.o_Value[1]
+o_Product[2] <= fourBitRegister:ProdLo.o_Value[2]
+o_Product[3] <= fourBitRegister:ProdLo.o_Value[3]
+o_Product[4] <= fourBitRegister:ProdHi.o_Value[0]
+o_Product[5] <= fourBitRegister:ProdHi.o_Value[1]
+o_Product[6] <= fourBitRegister:ProdHi.o_Value[2]
+o_Product[7] <= fourBitRegister:ProdHi.o_Value[3]
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg
+i_resetBar => enARdFF_2:msb.i_resetBar
+i_resetBar => enARdFF_2:tsb.i_resetBar
+i_resetBar => enARdFF_2:ssb.i_resetBar
+i_resetBar => enARdFF_2:lsb.i_resetBar
+i_load => enARdFF_2:msb.i_enable
+i_load => enARdFF_2:tsb.i_enable
+i_load => enARdFF_2:ssb.i_enable
+i_load => enARdFF_2:lsb.i_enable
+i_clock => enARdFF_2:msb.i_clock
+i_clock => enARdFF_2:tsb.i_clock
+i_clock => enARdFF_2:ssb.i_clock
+i_clock => enARdFF_2:lsb.i_clock
+i_Value[0] => enARdFF_2:lsb.i_d
+i_Value[1] => enARdFF_2:ssb.i_d
+i_Value[2] => enARdFF_2:tsb.i_d
+i_Value[3] => enARdFF_2:msb.i_d
+o_Value[0] <= enARdFF_2:lsb.o_q
+o_Value[1] <= enARdFF_2:ssb.o_q
+o_Value[2] <= enARdFF_2:tsb.o_q
+o_Value[3] <= enARdFF_2:msb.o_q
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:msb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:tsb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:ssb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:lsb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD
+i_A_v[0] => RippleAdder:RP.i_A_vect[0]
+i_A_v[1] => RippleAdder:RP.i_A_vect[1]
+i_A_v[2] => RippleAdder:RP.i_A_vect[2]
+i_A_v[3] => RippleAdder:RP.i_A_vect[3]
+i_B_v[0] => int_B_xor[0].IN0
+i_B_v[1] => int_B_xor[1].IN0
+i_B_v[2] => int_B_xor[2].IN0
+i_B_v[3] => int_B_xor[3].IN0
+i_Carry_in => int_B_xor[0].IN1
+i_Carry_in => int_B_xor[1].IN1
+i_Carry_in => int_B_xor[2].IN1
+i_Carry_in => int_B_xor[3].IN1
+i_Carry_in => RippleAdder:RP.i_Cin
+o_Carry_out <= RippleAdder:RP.o_Cout
+o_Zero <= o_Zero.DB_MAX_OUTPUT_PORT_TYPE
+o_overFlow <= RippleAdder:RP.o_overFlow
+o_Sum_vect[0] <= RippleAdder:RP.o_Sum_vect[0]
+o_Sum_vect[1] <= RippleAdder:RP.o_Sum_vect[1]
+o_Sum_vect[2] <= RippleAdder:RP.o_Sum_vect[2]
+o_Sum_vect[3] <= RippleAdder:RP.o_Sum_vect[3]
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP
+i_A_vect[0] => full_adder:FA_0.i_A
+i_A_vect[1] => full_adder:FA_1.i_A
+i_A_vect[2] => full_adder:FA_2.i_A
+i_A_vect[3] => full_adder:FA_3.i_A
+i_B_vect[0] => full_adder:FA_0.i_B
+i_B_vect[1] => full_adder:FA_1.i_B
+i_B_vect[2] => full_adder:FA_2.i_B
+i_B_vect[3] => full_adder:FA_3.i_B
+i_Cin => full_adder:FA_0.i_Carry_in
+o_Sum_vect[0] <= full_adder:FA_0.o_Sum
+o_Sum_vect[1] <= full_adder:FA_1.o_Sum
+o_Sum_vect[2] <= full_adder:FA_2.o_Sum
+o_Sum_vect[3] <= full_adder:FA_3.o_Sum
+o_Cout <= full_adder:FA_3.O_Carry_out
+o_overFlow <= o_overFlow.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP|full_adder:FA_0
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP|full_adder:FA_1
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP|full_adder:FA_2
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP|full_adder:FA_3
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux0
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg
+i_resetBar => enARdFF_2:msbFF.i_resetBar
+i_resetBar => enARdFF_2:b2FF.i_resetBar
+i_resetBar => enARdFF_2:b1FF.i_resetBar
+i_resetBar => enARdFF_2:b0FF.i_resetBar
+i_clock => enARdFF_2:msbFF.i_clock
+i_clock => enARdFF_2:b2FF.i_clock
+i_clock => enARdFF_2:b1FF.i_clock
+i_clock => enARdFF_2:b0FF.i_clock
+i_sel_0 => Mux4_1:msbMUX.i_sel_0
+i_sel_0 => Mux4_1:b2MUX.i_sel_0
+i_sel_0 => Mux4_1:b1MUX.i_sel_0
+i_sel_0 => Mux4_1:b0MUX.i_sel_0
+i_sel_1 => Mux4_1:msbMUX.i_sel_1
+i_sel_1 => Mux4_1:b2MUX.i_sel_1
+i_sel_1 => Mux4_1:b1MUX.i_sel_1
+i_sel_1 => Mux4_1:b0MUX.i_sel_1
+i_Value[0] => Mux4_1:b0MUX.i_val_1
+i_Value[1] => Mux4_1:b1MUX.i_val_1
+i_Value[2] => Mux4_1:b2MUX.i_val_1
+i_Value[3] => Mux4_1:msbMUX.i_val_1
+o_Value[0] <= enARdFF_2:b0FF.o_q
+o_Value[1] <= enARdFF_2:b1FF.o_q
+o_Value[2] <= enARdFF_2:b2FF.o_q
+o_Value[3] <= enARdFF_2:msbFF.o_q
+o_value_lsb <= enARdFF_2:b0FF.o_q
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:msbMUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:msbMUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:msbMUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:msbMUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:msbFF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b2MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b2MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b2MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b2MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b2FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b1MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b1MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b1MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b1MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b1FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b0MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b0MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b0MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:b0MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b0FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg
+i_resetBar => enARdFF_2:b3FF.i_resetBar
+i_resetBar => enARdFF_2:b2FF.i_resetBar
+i_resetBar => enARdFF_2:b1FF.i_resetBar
+i_resetBar => enARdFF_2:b0FF.i_resetBar
+i_clock => enARdFF_2:b3FF.i_clock
+i_clock => enARdFF_2:b2FF.i_clock
+i_clock => enARdFF_2:b1FF.i_clock
+i_clock => enARdFF_2:b0FF.i_clock
+i_sel_0 => Mux4_1:b3MUX.i_sel_0
+i_sel_0 => Mux4_1:b2MUX.i_sel_0
+i_sel_0 => Mux4_1:b1MUX.i_sel_0
+i_sel_0 => Mux4_1:b0MUX.i_sel_0
+i_sel_1 => Mux4_1:b3MUX.i_sel_1
+i_sel_1 => Mux4_1:b2MUX.i_sel_1
+i_sel_1 => Mux4_1:b1MUX.i_sel_1
+i_sel_1 => Mux4_1:b0MUX.i_sel_1
+i_shift_in => Mux4_1:b3MUX.i_val_2
+i_shift_in => Mux4_1:b3MUX.i_val_3
+i_Value[0] => Mux4_1:b0MUX.i_val_1
+i_Value[1] => Mux4_1:b1MUX.i_val_1
+i_Value[2] => Mux4_1:b2MUX.i_val_1
+i_Value[3] => Mux4_1:b3MUX.i_val_1
+o_Value[0] <= enARdFF_2:b0FF.o_q
+o_Value[1] <= enARdFF_2:b1FF.o_q
+o_Value[2] <= enARdFF_2:b2FF.o_q
+o_Value[3] <= enARdFF_2:b3FF.o_q
+o_value_lsb <= enARdFF_2:b0FF.o_q
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b3MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b3MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b3MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b3MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b3FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b2MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b2MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b2MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b2MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b2FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b1MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b1MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b1MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b1MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b1FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b0MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b0MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b0MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b0MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b0FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|enARdFF_2:Q1ff
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt
+i_resetBar => enARdFF_2:bit3FF.i_resetBar
+i_resetBar => enARdFF_2:bit2FF.i_resetBar
+i_resetBar => enARdFF_2:bit1FF.i_resetBar
+i_resetBar => enARdFF_2:bit0FF.i_resetBar
+i_clock => enARdFF_2:bit3FF.i_clock
+i_clock => enARdFF_2:bit2FF.i_clock
+i_clock => enARdFF_2:bit1FF.i_clock
+i_clock => enARdFF_2:bit0FF.i_clock
+i_sel_0 => Mux4_1:bit3MUX.i_sel_0
+i_sel_0 => Mux4_1:bit2MUX.i_sel_0
+i_sel_0 => Mux4_1:bit1MUX.i_sel_0
+i_sel_0 => Mux4_1:bit0MUX.i_sel_0
+i_sel_1 => Mux4_1:bit3MUX.i_sel_1
+i_sel_1 => Mux4_1:bit2MUX.i_sel_1
+i_sel_1 => Mux4_1:bit1MUX.i_sel_1
+i_sel_1 => Mux4_1:bit0MUX.i_sel_1
+i_Value[0] => Mux4_1:bit0MUX.i_val_1
+i_Value[1] => Mux4_1:bit1MUX.i_val_1
+i_Value[2] => Mux4_1:bit2MUX.i_val_1
+i_Value[3] => Mux4_1:bit3MUX.i_val_1
+o_Value[0] <= enARdFF_2:bit0FF.o_q
+o_Value[1] <= enARdFF_2:bit1FF.o_q
+o_Value[2] <= enARdFF_2:bit2FF.o_q
+o_Value[3] <= enARdFF_2:bit3FF.o_q
+o_zero <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit3MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit3MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit3MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit3MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit3FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit2MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit2MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit2MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit2MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit2FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit1MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit1MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit1MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit1MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit1FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit0MUX
+i_val_0 => Mux2_1:Mux2_1_1.i_val_0
+i_val_1 => Mux2_1:Mux2_1_1.i_val_1
+i_val_2 => Mux2_1:Mux2_1_2.i_val_0
+i_val_3 => Mux2_1:Mux2_1_2.i_val_1
+i_sel_0 => Mux2_1:Mux2_1_1.i_sel
+i_sel_0 => Mux2_1:Mux2_1_2.i_sel
+i_sel_1 => Mux2_1:Mux2_1_3.i_sel
+o_val <= Mux2_1:Mux2_1_3.o_val
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit0MUX|Mux2_1:Mux2_1_1
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit0MUX|Mux2_1:Mux2_1_2
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit0MUX|Mux2_1:Mux2_1_3
+i_val_0 => int_and1.IN0
+i_val_1 => int_and2.IN0
+i_sel => int_and2.IN1
+i_sel => int_and1.IN1
+o_val <= int_final_o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit0FF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi
+i_resetBar => enARdFF_2:msb.i_resetBar
+i_resetBar => enARdFF_2:tsb.i_resetBar
+i_resetBar => enARdFF_2:ssb.i_resetBar
+i_resetBar => enARdFF_2:lsb.i_resetBar
+i_load => enARdFF_2:msb.i_enable
+i_load => enARdFF_2:tsb.i_enable
+i_load => enARdFF_2:ssb.i_enable
+i_load => enARdFF_2:lsb.i_enable
+i_clock => enARdFF_2:msb.i_clock
+i_clock => enARdFF_2:tsb.i_clock
+i_clock => enARdFF_2:ssb.i_clock
+i_clock => enARdFF_2:lsb.i_clock
+i_Value[0] => enARdFF_2:lsb.i_d
+i_Value[1] => enARdFF_2:ssb.i_d
+i_Value[2] => enARdFF_2:tsb.i_d
+i_Value[3] => enARdFF_2:msb.i_d
+o_Value[0] <= enARdFF_2:lsb.o_q
+o_Value[1] <= enARdFF_2:ssb.o_q
+o_Value[2] <= enARdFF_2:tsb.o_q
+o_Value[3] <= enARdFF_2:msb.o_q
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi|enARdFF_2:msb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi|enARdFF_2:tsb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi|enARdFF_2:ssb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi|enARdFF_2:lsb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo
+i_resetBar => enARdFF_2:msb.i_resetBar
+i_resetBar => enARdFF_2:tsb.i_resetBar
+i_resetBar => enARdFF_2:ssb.i_resetBar
+i_resetBar => enARdFF_2:lsb.i_resetBar
+i_load => enARdFF_2:msb.i_enable
+i_load => enARdFF_2:tsb.i_enable
+i_load => enARdFF_2:ssb.i_enable
+i_load => enARdFF_2:lsb.i_enable
+i_clock => enARdFF_2:msb.i_clock
+i_clock => enARdFF_2:tsb.i_clock
+i_clock => enARdFF_2:ssb.i_clock
+i_clock => enARdFF_2:lsb.i_clock
+i_Value[0] => enARdFF_2:lsb.i_d
+i_Value[1] => enARdFF_2:ssb.i_d
+i_Value[2] => enARdFF_2:tsb.i_d
+i_Value[3] => enARdFF_2:msb.i_d
+o_Value[0] <= enARdFF_2:lsb.o_q
+o_Value[1] <= enARdFF_2:ssb.o_q
+o_Value[2] <= enARdFF_2:tsb.o_q
+o_Value[3] <= enARdFF_2:msb.o_q
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo|enARdFF_2:msb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo|enARdFF_2:tsb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo|enARdFF_2:ssb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo|enARdFF_2:lsb
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst
+i_clock => enARdFF_2:S0_init.i_clock
+i_clock => enARdFF_2:S1_sub.i_clock
+i_clock => enARdFF_2:S2_add.i_clock
+i_clock => enARdFF_2:S3_shift.i_clock
+i_clock => enARdFF_2:S4_done.i_clock
+i_resetBar => enARdFF_2:S0_init.i_resetBar
+i_resetBar => enARdFF_2:S1_sub.i_resetBar
+i_resetBar => enARdFF_2:S2_add.i_resetBar
+i_resetBar => enARdFF_2:S3_shift.i_resetBar
+i_resetBar => enARdFF_2:S4_done.i_resetBar
+i_q0 => int_Condition_S1.IN1
+i_q0 => int_state_for_s3.IN0
+i_q0 => int_Condition_S2.IN1
+i_q1 => int_Condition_S2.IN1
+i_q1 => int_state_for_s3.IN1
+i_q1 => int_Condition_S1.IN1
+i_Zero_Flag => int_Condition_S4.IN1
+i_Zero_Flag => int_G_loop.IN1
+o_loadM <= enARdFF_2:S0_init.o_qBar
+o_selQ_1 <= enARdFF_2:S3_shift.o_q
+o_selQ_0 <= enARdFF_2:S0_init.o_qBar
+o_selA_1 <= enARdFF_2:S3_shift.o_q
+o_selA_0 <= o_selA_0.DB_MAX_OUTPUT_PORT_TYPE
+o_A_load_zero <= enARdFF_2:S0_init.o_qBar
+o_sub <= enARdFF_2:S1_sub.o_q
+o_selN_1 <= enARdFF_2:S3_shift.o_q
+o_selN_0 <= enARdFF_2:S0_init.o_qBar
+o_enQ1 <= o_enQ1.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_latchProduct <= enARdFF_2:S4_done.o_q
+o_done <= enARdFF_2:S4_done.o_q
+
+
+|ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S0_init
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S1_sub
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S2_add
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S3_shift
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S4_done
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|lpm_constant1:inst8
+result[0] <= lpm_constant:LPM_CONSTANT_component.result[0]
+result[1] <= lpm_constant:LPM_CONSTANT_component.result[1]
+result[2] <= lpm_constant:LPM_CONSTANT_component.result[2]
+result[3] <= lpm_constant:LPM_CONSTANT_component.result[3]
+
+
+|ALU|lpm_constant1:inst8|lpm_constant:LPM_CONSTANT_component
+result[0] <= <GND>
+result[1] <= <GND>
+result[2] <= <VCC>
+result[3] <= <GND>
+
+
+|ALU|Division_non_restoring:inst1
+Done <= Non_Restoring_Controller:c1.o_done
+Gclock => Non_Restoring_Controller:c1.i_clock
+Gclock => Non_Restoring_Datapath:inst.i_clock
+Greset => Non_Restoring_Controller:c1.i_resetBar
+Greset => Non_Restoring_Datapath:inst.i_resetBar
+Start => Non_Restoring_Controller:c1.i_start
+int_Dividend[0] => Non_Restoring_Datapath:inst.i_Dividend[0]
+int_Dividend[1] => Non_Restoring_Datapath:inst.i_Dividend[1]
+int_Dividend[2] => Non_Restoring_Datapath:inst.i_Dividend[2]
+int_Dividend[3] => Non_Restoring_Datapath:inst.i_Dividend[3]
+int_Divisor[0] => Non_Restoring_Datapath:inst.i_Divisor[0]
+int_Divisor[1] => Non_Restoring_Datapath:inst.i_Divisor[1]
+int_Divisor[2] => Non_Restoring_Datapath:inst.i_Divisor[2]
+int_Divisor[3] => Non_Restoring_Datapath:inst.i_Divisor[3]
+N[0] => Non_Restoring_Datapath:inst.i_N_init[0]
+N[1] => Non_Restoring_Datapath:inst.i_N_init[1]
+N[2] => Non_Restoring_Datapath:inst.i_N_init[2]
+N[3] => Non_Restoring_Datapath:inst.i_N_init[3]
+Overflow <= Non_Restoring_Datapath:inst.o_overflow
+Quotient[0] <= Non_Restoring_Datapath:inst.o_Q_signed[0]
+Quotient[1] <= Non_Restoring_Datapath:inst.o_Q_signed[1]
+Quotient[2] <= Non_Restoring_Datapath:inst.o_Q_signed[2]
+Quotient[3] <= Non_Restoring_Datapath:inst.o_Q_signed[3]
+Remainder[0] <= Non_Restoring_Datapath:inst.o_R_signed[0]
+Remainder[1] <= Non_Restoring_Datapath:inst.o_R_signed[1]
+Remainder[2] <= Non_Restoring_Datapath:inst.o_R_signed[2]
+Remainder[3] <= Non_Restoring_Datapath:inst.o_R_signed[3]
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Controller:c1
+i_clock => cur~1.DATAIN
+i_resetBar => cur~3.DATAIN
+i_start => nxt.OUTPUTSELECT
+i_start => nxt.OUTPUTSELECT
+i_start => nxt.OUTPUTSELECT
+i_start => nxt.OUTPUTSELECT
+i_start => nxt.OUTPUTSELECT
+i_start => nxt.OUTPUTSELECT
+i_start => nxt.OUTPUTSELECT
+i_msb_R => Selector6.IN3
+i_msb_R => ctrl_inlsb.DATAB
+i_msb_R => ctrl_sub.DATAB
+i_N_is_zero => Selector4.IN3
+i_N_is_zero => Selector1.IN3
+ctrl_loadD <= ctrl_loadD.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_loadQ <= ctrl_loadQ.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_loadN <= ctrl_loadN.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_clearR <= ctrl_clearR.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_shiftR <= ctrl_shiftR.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_shiftQ <= ctrl_shiftQ.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_loadR <= Selector6.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_sub <= ctrl_sub.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_setlsb <= ctrl_setlsb.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_inlsb <= ctrl_inlsb.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_decN <= ctrl_decN.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_LoadQ_S <= ctrl_LoadQ_S.DB_MAX_OUTPUT_PORT_TYPE
+ctrl_LoadR_S <= ctrl_LoadR_S.DB_MAX_OUTPUT_PORT_TYPE
+o_done <= o_done.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst
+i_clock => reg4_divisor_mag:D_reg.i_clock
+i_clock => reg5_R_shift:Remain_reg.i_clock
+i_clock => reg4_Q_shift_setlsb:Quotient_reg.i_clock
+i_clock => dec_counter4:N_cnt.i_clock
+i_clock => sign_applyQ4:Q_reg_sign.i_clock
+i_clock => sign_applyR5_to4:R_reg_sign.i_clock
+i_resetBar => reg4_divisor_mag:D_reg.i_resetBar
+i_resetBar => reg5_R_shift:Remain_reg.i_resetBar
+i_resetBar => reg4_Q_shift_setlsb:Quotient_reg.i_resetBar
+i_resetBar => dec_counter4:N_cnt.i_resetBar
+i_resetBar => sign_applyQ4:Q_reg_sign.i_resetBar
+i_resetBar => sign_applyR5_to4:R_reg_sign.i_resetBar
+i_Dividend[0] => reg4_Q_shift_setlsb:Quotient_reg.i_Q_signed[0]
+i_Dividend[1] => reg4_Q_shift_setlsb:Quotient_reg.i_Q_signed[1]
+i_Dividend[2] => reg4_Q_shift_setlsb:Quotient_reg.i_Q_signed[2]
+i_Dividend[3] => reg4_Q_shift_setlsb:Quotient_reg.i_Q_signed[3]
+i_Divisor[0] => reg4_divisor_mag:D_reg.i_D_signed[0]
+i_Divisor[1] => reg4_divisor_mag:D_reg.i_D_signed[1]
+i_Divisor[2] => reg4_divisor_mag:D_reg.i_D_signed[2]
+i_Divisor[3] => reg4_divisor_mag:D_reg.i_D_signed[3]
+ctrl_loadD => reg4_divisor_mag:D_reg.i_load
+ctrl_loadQ => reg4_Q_shift_setlsb:Quotient_reg.i_load
+ctrl_shiftQ => reg4_Q_shift_setlsb:Quotient_reg.i_shift
+ctrl_setlsb => reg4_Q_shift_setlsb:Quotient_reg.i_setlsb
+ctrl_inlsb => reg4_Q_shift_setlsb:Quotient_reg.i_lsb
+ctrl_clearR => reg5_R_shift:Remain_reg.i_clear
+ctrl_loadR => reg5_R_shift:Remain_reg.i_load
+ctrl_shiftR => reg5_R_shift:Remain_reg.i_shift
+ctrl_sub => adder_subtractor_5bit:U_ADD.i_Carry_in
+ctrl_loadN => dec_counter4:N_cnt.i_load
+ctrl_decN => dec_counter4:N_cnt.i_dec
+i_N_init[0] => dec_counter4:N_cnt.i_din[0]
+i_N_init[1] => dec_counter4:N_cnt.i_din[1]
+i_N_init[2] => dec_counter4:N_cnt.i_din[2]
+i_N_init[3] => dec_counter4:N_cnt.i_din[3]
+ctrl_LoadQ_S => sign_applyQ4:Q_reg_sign.i_load
+ctrl_isQneg => ~NO_FANOUT~
+ctrl_LoadR_S => sign_applyR5_to4:R_reg_sign.i_load
+ctrl_isRneg => ~NO_FANOUT~
+o_msb_R <= reg5_R_shift:Remain_reg.o_msb
+o_N_is_zero <= dec_counter4:N_cnt.o_zero
+o_Q_signed[0] <= sign_applyQ4:Q_reg_sign.o_Q4_signed[0]
+o_Q_signed[1] <= sign_applyQ4:Q_reg_sign.o_Q4_signed[1]
+o_Q_signed[2] <= sign_applyQ4:Q_reg_sign.o_Q4_signed[2]
+o_Q_signed[3] <= sign_applyQ4:Q_reg_sign.o_Q4_signed[3]
+o_R_signed[0] <= sign_applyR5_to4:R_reg_sign.o_R4_signed[0]
+o_R_signed[1] <= sign_applyR5_to4:R_reg_sign.o_R4_signed[1]
+o_R_signed[2] <= sign_applyR5_to4:R_reg_sign.o_R4_signed[2]
+o_R_signed[3] <= sign_applyR5_to4:R_reg_sign.o_R4_signed[3]
+o_overflow <= adder_subtractor_5bit:U_ADD.o_overFlow
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_divisor_mag:D_reg
+i_clock => r_sign.CLK
+i_clock => r_mag[0].CLK
+i_clock => r_mag[1].CLK
+i_clock => r_mag[2].CLK
+i_clock => r_mag[3].CLK
+i_resetBar => r_sign.ACLR
+i_resetBar => r_mag[0].ACLR
+i_resetBar => r_mag[1].ACLR
+i_resetBar => r_mag[2].ACLR
+i_resetBar => r_mag[3].ACLR
+i_load => r_sign.ENA
+i_load => r_mag[3].ENA
+i_load => r_mag[2].ENA
+i_load => r_mag[1].ENA
+i_load => r_mag[0].ENA
+i_D_signed[0] => r_mag.DATAA
+i_D_signed[0] => Add0.IN10
+i_D_signed[1] => r_mag.DATAA
+i_D_signed[1] => Add0.IN9
+i_D_signed[2] => r_mag.DATAA
+i_D_signed[2] => Add0.IN8
+i_D_signed[3] => r_mag.OUTPUTSELECT
+i_D_signed[3] => r_mag.OUTPUTSELECT
+i_D_signed[3] => r_mag.OUTPUTSELECT
+i_D_signed[3] => r_mag.OUTPUTSELECT
+i_D_signed[3] => Add0.IN6
+i_D_signed[3] => Add0.IN7
+i_D_signed[3] => r_sign.DATAIN
+o_D_mag[0] <= r_mag[0].DB_MAX_OUTPUT_PORT_TYPE
+o_D_mag[1] <= r_mag[1].DB_MAX_OUTPUT_PORT_TYPE
+o_D_mag[2] <= r_mag[2].DB_MAX_OUTPUT_PORT_TYPE
+o_D_mag[3] <= r_mag[3].DB_MAX_OUTPUT_PORT_TYPE
+o_D_sign <= r_sign.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg5_R_shift:Remain_reg
+i_clock => r[0].CLK
+i_clock => r[1].CLK
+i_clock => r[2].CLK
+i_clock => r[3].CLK
+i_clock => r[4].CLK
+i_resetBar => r[0].ACLR
+i_resetBar => r[1].ACLR
+i_resetBar => r[2].ACLR
+i_resetBar => r[3].ACLR
+i_resetBar => r[4].ACLR
+i_clear => r.OUTPUTSELECT
+i_clear => r.OUTPUTSELECT
+i_clear => r.OUTPUTSELECT
+i_clear => r.OUTPUTSELECT
+i_clear => r.OUTPUTSELECT
+i_load => r.OUTPUTSELECT
+i_load => r.OUTPUTSELECT
+i_load => r.OUTPUTSELECT
+i_load => r.OUTPUTSELECT
+i_load => r.OUTPUTSELECT
+i_shift => r.OUTPUTSELECT
+i_shift => r.OUTPUTSELECT
+i_shift => r.OUTPUTSELECT
+i_shift => r.OUTPUTSELECT
+i_shift => r.OUTPUTSELECT
+i_sin => r.DATAB
+i_D[0] => r.DATAB
+i_D[1] => r.DATAB
+i_D[2] => r.DATAB
+i_D[3] => r.DATAB
+i_D[4] => r.DATAB
+o_Q[0] <= r[0].DB_MAX_OUTPUT_PORT_TYPE
+o_Q[1] <= r[1].DB_MAX_OUTPUT_PORT_TYPE
+o_Q[2] <= r[2].DB_MAX_OUTPUT_PORT_TYPE
+o_Q[3] <= r[3].DB_MAX_OUTPUT_PORT_TYPE
+o_Q[4] <= r[4].DB_MAX_OUTPUT_PORT_TYPE
+o_msb <= r[4].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_Q_shift_setlsb:Quotient_reg
+i_clock => r_sign.CLK
+i_clock => r_mag[0].CLK
+i_clock => r_mag[1].CLK
+i_clock => r_mag[2].CLK
+i_clock => r_mag[3].CLK
+i_resetBar => r_sign.ACLR
+i_resetBar => r_mag[0].ACLR
+i_resetBar => r_mag[1].ACLR
+i_resetBar => r_mag[2].ACLR
+i_resetBar => r_mag[3].ACLR
+i_clear => r_mag.OUTPUTSELECT
+i_clear => r_mag.OUTPUTSELECT
+i_clear => r_mag.OUTPUTSELECT
+i_clear => r_mag.OUTPUTSELECT
+i_clear => r_sign.OUTPUTSELECT
+i_load => r_mag.OUTPUTSELECT
+i_load => r_mag.OUTPUTSELECT
+i_load => r_mag.OUTPUTSELECT
+i_load => r_mag.OUTPUTSELECT
+i_load => r_sign.OUTPUTSELECT
+i_shift => r_mag.OUTPUTSELECT
+i_shift => r_mag.OUTPUTSELECT
+i_shift => r_mag.OUTPUTSELECT
+i_shift => r_mag.OUTPUTSELECT
+i_setlsb => nxt.OUTPUTSELECT
+i_setlsb => r_mag.OUTPUTSELECT
+i_lsb => nxt.DATAB
+i_lsb => r_mag.DATAB
+i_Q_signed[0] => m.DATAA
+i_Q_signed[0] => Add0.IN10
+i_Q_signed[1] => m.DATAA
+i_Q_signed[1] => Add0.IN9
+i_Q_signed[2] => m.DATAA
+i_Q_signed[2] => Add0.IN8
+i_Q_signed[3] => m.OUTPUTSELECT
+i_Q_signed[3] => m.OUTPUTSELECT
+i_Q_signed[3] => m.OUTPUTSELECT
+i_Q_signed[3] => m.OUTPUTSELECT
+i_Q_signed[3] => r_sign.DATAB
+i_Q_signed[3] => Add0.IN6
+i_Q_signed[3] => Add0.IN7
+o_Q_mag[0] <= r_mag[0].DB_MAX_OUTPUT_PORT_TYPE
+o_Q_mag[1] <= r_mag[1].DB_MAX_OUTPUT_PORT_TYPE
+o_Q_mag[2] <= r_mag[2].DB_MAX_OUTPUT_PORT_TYPE
+o_Q_mag[3] <= r_mag[3].DB_MAX_OUTPUT_PORT_TYPE
+o_Q_sign <= r_sign.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD
+i_A_v[0] => RippleAdder_Fivebit:RP.i_A_vect[0]
+i_A_v[1] => RippleAdder_Fivebit:RP.i_A_vect[1]
+i_A_v[2] => RippleAdder_Fivebit:RP.i_A_vect[2]
+i_A_v[3] => RippleAdder_Fivebit:RP.i_A_vect[3]
+i_A_v[4] => RippleAdder_Fivebit:RP.i_A_vect[4]
+i_B_v[0] => int_B_xor[0].IN0
+i_B_v[1] => int_B_xor[1].IN0
+i_B_v[2] => int_B_xor[2].IN0
+i_B_v[3] => int_B_xor[3].IN0
+i_B_v[4] => int_B_xor[4].IN0
+i_Carry_in => int_B_xor[0].IN1
+i_Carry_in => int_B_xor[1].IN1
+i_Carry_in => int_B_xor[2].IN1
+i_Carry_in => int_B_xor[3].IN1
+i_Carry_in => int_B_xor[4].IN1
+i_Carry_in => RippleAdder_Fivebit:RP.i_Cin
+o_Carry_out <= RippleAdder_Fivebit:RP.o_Cout
+o_Zero <= o_Zero.DB_MAX_OUTPUT_PORT_TYPE
+o_overFlow <= RippleAdder_Fivebit:RP.o_overFlow
+o_Sum_vect[0] <= RippleAdder_Fivebit:RP.o_Sum_vect[0]
+o_Sum_vect[1] <= RippleAdder_Fivebit:RP.o_Sum_vect[1]
+o_Sum_vect[2] <= RippleAdder_Fivebit:RP.o_Sum_vect[2]
+o_Sum_vect[3] <= RippleAdder_Fivebit:RP.o_Sum_vect[3]
+o_Sum_vect[4] <= RippleAdder_Fivebit:RP.o_Sum_vect[4]
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP
+i_A_vect[0] => full_adder:FA_0.i_A
+i_A_vect[1] => full_adder:FA_1.i_A
+i_A_vect[2] => full_adder:FA_2.i_A
+i_A_vect[3] => full_adder:FA_3.i_A
+i_A_vect[4] => full_adder:FA_4.i_A
+i_B_vect[0] => full_adder:FA_0.i_B
+i_B_vect[1] => full_adder:FA_1.i_B
+i_B_vect[2] => full_adder:FA_2.i_B
+i_B_vect[3] => full_adder:FA_3.i_B
+i_B_vect[4] => full_adder:FA_4.i_B
+i_Cin => full_adder:FA_0.i_Carry_in
+o_Sum_vect[0] <= full_adder:FA_0.o_Sum
+o_Sum_vect[1] <= full_adder:FA_1.o_Sum
+o_Sum_vect[2] <= full_adder:FA_2.o_Sum
+o_Sum_vect[3] <= full_adder:FA_3.o_Sum
+o_Sum_vect[4] <= full_adder:FA_4.o_Sum
+o_Cout <= full_adder:FA_4.O_Carry_out
+o_overFlow <= o_overFlow.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_0
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_1
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_2
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_3
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_4
+i_A => int_C1.IN0
+i_A => int_C3.IN0
+i_A => int_Sum.IN0
+i_B => int_C2.IN0
+i_B => int_C3.IN1
+i_B => int_Sum.IN1
+i_Carry_in => int_C1.IN1
+i_Carry_in => int_C2.IN1
+i_Carry_in => int_Sum.IN1
+o_Sum <= int_Sum.DB_MAX_OUTPUT_PORT_TYPE
+O_Carry_out <= int_Carry_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|dec_counter4:N_cnt
+i_clock => r_cnt[0].CLK
+i_clock => r_cnt[1].CLK
+i_clock => r_cnt[2].CLK
+i_clock => r_cnt[3].CLK
+i_resetBar => r_cnt[0].ACLR
+i_resetBar => r_cnt[1].ACLR
+i_resetBar => r_cnt[2].ACLR
+i_resetBar => r_cnt[3].ACLR
+i_load => r_cnt.OUTPUTSELECT
+i_load => r_cnt.OUTPUTSELECT
+i_load => r_cnt.OUTPUTSELECT
+i_load => r_cnt.OUTPUTSELECT
+i_dec => r_cnt.OUTPUTSELECT
+i_dec => r_cnt.OUTPUTSELECT
+i_dec => r_cnt.OUTPUTSELECT
+i_dec => r_cnt.OUTPUTSELECT
+i_din[0] => r_cnt.DATAB
+i_din[1] => r_cnt.DATAB
+i_din[2] => r_cnt.DATAB
+i_din[3] => r_cnt.DATAB
+o_q[0] <= r_cnt[0].DB_MAX_OUTPUT_PORT_TYPE
+o_q[1] <= r_cnt[1].DB_MAX_OUTPUT_PORT_TYPE
+o_q[2] <= r_cnt[2].DB_MAX_OUTPUT_PORT_TYPE
+o_q[3] <= r_cnt[3].DB_MAX_OUTPUT_PORT_TYPE
+o_zero <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|sign_applyQ4:Q_reg_sign
+i_clock => r_out[0].CLK
+i_clock => r_out[1].CLK
+i_clock => r_out[2].CLK
+i_clock => r_out[3].CLK
+i_resetBar => r_out[0].ACLR
+i_resetBar => r_out[1].ACLR
+i_resetBar => r_out[2].ACLR
+i_resetBar => r_out[3].ACLR
+i_load => r_out[0].ENA
+i_load => r_out[3].ENA
+i_load => r_out[2].ENA
+i_load => r_out[1].ENA
+i_Q4_mag[0] => sgn.DATAA
+i_Q4_mag[0] => Add0.IN10
+i_Q4_mag[1] => sgn.DATAA
+i_Q4_mag[1] => Add0.IN9
+i_Q4_mag[2] => sgn.DATAA
+i_Q4_mag[2] => Add0.IN8
+i_Q4_mag[3] => sgn.DATAA
+i_Q4_mag[3] => Add0.IN6
+i_Q4_mag[3] => Add0.IN7
+i_neg => sgn.OUTPUTSELECT
+i_neg => sgn.OUTPUTSELECT
+i_neg => sgn.OUTPUTSELECT
+i_neg => sgn.OUTPUTSELECT
+o_Q4_signed[0] <= r_out[0].DB_MAX_OUTPUT_PORT_TYPE
+o_Q4_signed[1] <= r_out[1].DB_MAX_OUTPUT_PORT_TYPE
+o_Q4_signed[2] <= r_out[2].DB_MAX_OUTPUT_PORT_TYPE
+o_Q4_signed[3] <= r_out[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|sign_applyR5_to4:R_reg_sign
+i_clock => r_out[0].CLK
+i_clock => r_out[1].CLK
+i_clock => r_out[2].CLK
+i_clock => r_out[3].CLK
+i_resetBar => r_out[0].ACLR
+i_resetBar => r_out[1].ACLR
+i_resetBar => r_out[2].ACLR
+i_resetBar => r_out[3].ACLR
+i_load => r_out[0].ENA
+i_load => r_out[3].ENA
+i_load => r_out[2].ENA
+i_load => r_out[1].ENA
+i_R5_mag[0] => res.DATAA
+i_R5_mag[0] => Add0.IN10
+i_R5_mag[1] => res.DATAA
+i_R5_mag[1] => Add0.IN9
+i_R5_mag[2] => res.DATAA
+i_R5_mag[2] => Add0.IN8
+i_R5_mag[3] => res.DATAA
+i_R5_mag[3] => Add0.IN6
+i_R5_mag[3] => Add0.IN7
+i_R5_mag[4] => ~NO_FANOUT~
+i_neg => res.OUTPUTSELECT
+i_neg => res.OUTPUTSELECT
+i_neg => res.OUTPUTSELECT
+i_neg => res.OUTPUTSELECT
+o_R4_signed[0] <= r_out[0].DB_MAX_OUTPUT_PORT_TYPE
+o_R4_signed[1] <= r_out[1].DB_MAX_OUTPUT_PORT_TYPE
+o_R4_signed[2] <= r_out[2].DB_MAX_OUTPUT_PORT_TYPE
+o_R4_signed[3] <= r_out[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|StartPulse_OnReset:inst12
+i_clock => resetBar_d.CLK
+i_resetBar => o_start_pulse.IN1
+i_resetBar => resetBar_d.DATAIN
+i_resetBar => resetBar_d.ACLR
+o_start_pulse <= o_start_pulse.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|lpm_constant1:inst10
+result[0] <= lpm_constant:LPM_CONSTANT_component.result[0]
+result[1] <= lpm_constant:LPM_CONSTANT_component.result[1]
+result[2] <= lpm_constant:LPM_CONSTANT_component.result[2]
+result[3] <= lpm_constant:LPM_CONSTANT_component.result[3]
+
+
+|ALU|lpm_constant1:inst10|lpm_constant:LPM_CONSTANT_component
+result[0] <= <GND>
+result[1] <= <GND>
+result[2] <= <VCC>
+result[3] <= <GND>
+
+
+|ALU|fourBitComparator:inst4
+i_Ai[0] => oneBitComparator:comp0.i_Ai
+i_Ai[1] => oneBitComparator:comp1.i_Ai
+i_Ai[2] => oneBitComparator:comp2.i_Ai
+i_Ai[3] => oneBitComparator:comp3.i_Ai
+i_Bi[0] => oneBitComparator:comp0.i_Bi
+i_Bi[1] => oneBitComparator:comp1.i_Bi
+i_Bi[2] => oneBitComparator:comp2.i_Bi
+i_Bi[3] => oneBitComparator:comp3.i_Bi
+o_GT <= oneBitComparator:comp0.o_GT
+o_LT <= oneBitComparator:comp0.o_LT
+o_EQ <= o_EQ.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst4|oneBitComparator:comp3
+i_GTPrevious => int_GT2.IN0
+i_GTPrevious => int_GT1.IN0
+i_GTPrevious => int_LT2.IN0
+i_LTPrevious => int_LT2.IN1
+i_LTPrevious => int_GT1.IN1
+i_LTPrevious => int_GT2.IN1
+i_Ai => int_GT1.IN1
+i_Ai => int_LT1.IN1
+i_Bi => int_LT1.IN1
+i_Bi => int_GT1.IN1
+o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
+o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst4|oneBitComparator:comp2
+i_GTPrevious => int_GT2.IN0
+i_GTPrevious => int_GT1.IN0
+i_GTPrevious => int_LT2.IN0
+i_LTPrevious => int_LT2.IN1
+i_LTPrevious => int_GT1.IN1
+i_LTPrevious => int_GT2.IN1
+i_Ai => int_GT1.IN1
+i_Ai => int_LT1.IN1
+i_Bi => int_LT1.IN1
+i_Bi => int_GT1.IN1
+o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
+o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst4|oneBitComparator:comp1
+i_GTPrevious => int_GT2.IN0
+i_GTPrevious => int_GT1.IN0
+i_GTPrevious => int_LT2.IN0
+i_LTPrevious => int_LT2.IN1
+i_LTPrevious => int_GT1.IN1
+i_LTPrevious => int_GT2.IN1
+i_Ai => int_GT1.IN1
+i_Ai => int_LT1.IN1
+i_Bi => int_LT1.IN1
+i_Bi => int_GT1.IN1
+o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
+o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|fourBitComparator:inst4|oneBitComparator:comp0
+i_GTPrevious => int_GT2.IN0
+i_GTPrevious => int_GT1.IN0
+i_GTPrevious => int_LT2.IN0
+i_LTPrevious => int_LT2.IN1
+i_LTPrevious => int_GT1.IN1
+i_LTPrevious => int_GT2.IN1
+i_Ai => int_GT1.IN1
+i_Ai => int_LT1.IN1
+i_Bi => int_LT1.IN1
+i_Bi => int_GT1.IN1
+o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
+o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|eightBitRegister:inst5
+i_resetBar => enARdFF_2:bit7.i_resetBar
+i_resetBar => enARdFF_2:bit6.i_resetBar
+i_resetBar => enARdFF_2:bit5.i_resetBar
+i_resetBar => enARdFF_2:bit4.i_resetBar
+i_resetBar => enARdFF_2:bit3.i_resetBar
+i_resetBar => enARdFF_2:bit2.i_resetBar
+i_resetBar => enARdFF_2:bit1.i_resetBar
+i_resetBar => enARdFF_2:bit0.i_resetBar
+i_load => enARdFF_2:bit7.i_enable
+i_load => enARdFF_2:bit6.i_enable
+i_load => enARdFF_2:bit5.i_enable
+i_load => enARdFF_2:bit4.i_enable
+i_load => enARdFF_2:bit3.i_enable
+i_load => enARdFF_2:bit2.i_enable
+i_load => enARdFF_2:bit1.i_enable
+i_load => enARdFF_2:bit0.i_enable
+i_clock => enARdFF_2:bit7.i_clock
+i_clock => enARdFF_2:bit6.i_clock
+i_clock => enARdFF_2:bit5.i_clock
+i_clock => enARdFF_2:bit4.i_clock
+i_clock => enARdFF_2:bit3.i_clock
+i_clock => enARdFF_2:bit2.i_clock
+i_clock => enARdFF_2:bit1.i_clock
+i_clock => enARdFF_2:bit0.i_clock
+i_Value[0] => enARdFF_2:bit0.i_d
+i_Value[1] => enARdFF_2:bit1.i_d
+i_Value[2] => enARdFF_2:bit2.i_d
+i_Value[3] => enARdFF_2:bit3.i_d
+i_Value[4] => enARdFF_2:bit4.i_d
+i_Value[5] => enARdFF_2:bit5.i_d
+i_Value[6] => enARdFF_2:bit6.i_d
+i_Value[7] => enARdFF_2:bit7.i_d
+o_Value[0] <= enARdFF_2:bit0.o_q
+o_Value[1] <= enARdFF_2:bit1.o_q
+o_Value[2] <= enARdFF_2:bit2.o_q
+o_Value[3] <= enARdFF_2:bit3.o_q
+o_Value[4] <= enARdFF_2:bit4.o_q
+o_Value[5] <= enARdFF_2:bit5.o_q
+o_Value[6] <= enARdFF_2:bit6.o_q
+o_Value[7] <= enARdFF_2:bit7.o_q
+
+
+|ALU|eightBitRegister:inst5|enARdFF_2:bit7
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|eightBitRegister:inst5|enARdFF_2:bit6
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|eightBitRegister:inst5|enARdFF_2:bit5
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|eightBitRegister:inst5|enARdFF_2:bit4
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|eightBitRegister:inst5|enARdFF_2:bit3
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|eightBitRegister:inst5|enARdFF_2:bit2
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|eightBitRegister:inst5|enARdFF_2:bit1
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|eightBitRegister:inst5|enARdFF_2:bit0
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+

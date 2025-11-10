@@ -1,0 +1,139 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY Right_Shift_four_bit_register IS
+  PORT(
+    i_resetBar    : IN  STD_LOGIC;
+    i_clock       : IN  STD_LOGIC;
+    -- MUX selects: 00=hold, 01=load, 1X=arith right shift
+    i_sel_0       : IN  STD_LOGIC;  -- LSB of select
+    i_sel_1       : IN  STD_LOGIC;  -- MSB of select
+    i_Value       : IN  STD_LOGIC_VECTOR(3 DOWNTO 0); -- parallel load value
+    o_Value       : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+    o_value_lsb   : OUT STD_LOGIC
+  );
+END Shift_Right_four_bit_register;
+
+ARCHITECTURE rtl OF Shift_Right_four_bit_register IS
+  SIGNAL int_Value : STD_LOGIC_VECTOR(3 DOWNTO 0); -- current state (Q)
+  SIGNAL nxt_Value : STD_LOGIC_VECTOR(3 DOWNTO 0); -- next state (D)
+  SIGNAL sr        : STD_LOGIC_VECTOR(3 DOWNTO 0); -- arithmetic right-shifted value
+
+  COMPONENT enARdFF_2
+    PORT(
+      i_resetBar : IN  STD_LOGIC;
+      i_d        : IN  STD_LOGIC;
+      i_enable   : IN  STD_LOGIC;
+      i_clock    : IN  STD_LOGIC;
+      o_q        : OUT STD_LOGIC
+    );
+  END COMPONENT;
+
+  COMPONENT Mux4_1 IS
+    PORT(
+      i_val_0  : IN  STD_LOGIC;  -- select = "00"
+      i_val_1  : IN  STD_LOGIC;  -- select = "01"
+      i_val_2  : IN  STD_LOGIC;  -- select = "10"
+      i_val_3  : IN  STD_LOGIC;  -- select = "11"
+      i_sel_0  : IN  STD_LOGIC;  -- LSB
+      i_sel_1  : IN  STD_LOGIC;  -- MSB
+      o_val    : OUT STD_LOGIC
+    );
+  END COMPONENT;
+
+BEGIN
+  -- Arithmetic right shift by 1 (sign-extend MSB)
+  sr(3) <= int_Value(3);        -- sign bit stays the same
+  sr(2) <= int_Value(3);
+  sr(1) <= int_Value(2);
+  sr(0) <= int_Value(1);
+
+  -- MSB bit (bit 3)
+  msbMUX : Mux4_1
+    PORT MAP(
+      i_val_0 => int_Value(3),   -- hold
+      i_val_1 => i_Value(3),     -- load
+      i_val_2 => sr(3),          -- shift (10)
+      i_val_3 => sr(3),          -- shift (11)
+      i_sel_0 => i_sel_0,
+      i_sel_1 => i_sel_1,
+      o_val   => nxt_Value(3)
+    );
+
+  msbFF : enARdFF_2
+    PORT MAP(
+      i_resetBar => i_resetBar,
+      i_d        => nxt_Value(3),
+      i_enable   => '1',         -- always enabled; hold is via MUX
+      i_clock    => i_clock,
+      o_q        => int_Value(3)
+    );
+
+  -- Bit 2
+  b2MUX : Mux4_1
+    PORT MAP(
+      i_val_0 => int_Value(2),
+      i_val_1 => i_Value(2),
+      i_val_2 => sr(2),
+      i_val_3 => sr(2),
+      i_sel_0 => i_sel_0,
+      i_sel_1 => i_sel_1,
+      o_val   => nxt_Value(2)
+    );
+
+  b2FF : enARdFF_2
+    PORT MAP(
+      i_resetBar => i_resetBar,
+      i_d        => nxt_Value(2),
+      i_enable   => '1',
+      i_clock    => i_clock,
+      o_q        => int_Value(2)
+    );
+
+  -- Bit 1
+  b1MUX : Mux4_1
+    PORT MAP(
+      i_val_0 => int_Value(1),
+      i_val_1 => i_Value(1),
+      i_val_2 => sr(1),
+      i_val_3 => sr(1),
+      i_sel_0 => i_sel_0,
+      i_sel_1 => i_sel_1,
+      o_val   => nxt_Value(1)
+    );
+
+  b1FF : enARdFF_2
+    PORT MAP(
+      i_resetBar => i_resetBar,
+      i_d        => nxt_Value(1),
+      i_enable   => '1',
+      i_clock    => i_clock,
+      o_q        => int_Value(1)
+    );
+
+  -- LSB bit (bit 0)
+  b0MUX : Mux4_1
+    PORT MAP(
+      i_val_0 => int_Value(0),
+      i_val_1 => i_Value(0),
+      i_val_2 => sr(0),
+      i_val_3 => sr(0),
+      i_sel_0 => i_sel_0,
+      i_sel_1 => i_sel_1,
+      o_val   => nxt_Value(0)
+    );
+
+  b0FF : enARdFF_2
+    PORT MAP(
+      i_resetBar => i_resetBar,
+      i_d        => nxt_Value(0),
+      i_enable   => '1',
+      i_clock    => i_clock,
+      o_q        => int_Value(0)
+    );
+
+  -- Outputs
+  o_Value     <= int_Value;
+  o_value_lsb <= int_Value(0);
+
+END rtl;

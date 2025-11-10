@@ -1,0 +1,1050 @@
+Analysis & Synthesis report for lab2
+Sun Nov 09 21:27:07 2025
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis IP Cores Summary
+  9. State Machine - |ALU|Division_non_restoring:inst1|Non_Restoring_Controller:c1|cur
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Parameter Settings for User Entity Instance: lpm_constant1:inst8|lpm_constant:LPM_CONSTANT_component
+ 14. Parameter Settings for User Entity Instance: lpm_constant1:inst10|lpm_constant:LPM_CONSTANT_component
+ 15. Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit0"
+ 16. Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit1"
+ 17. Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit2"
+ 18. Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit3"
+ 19. Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit4"
+ 20. Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit5"
+ 21. Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit6"
+ 22. Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit7"
+ 23. Port Connectivity Checks: "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|dec_counter4:N_cnt"
+ 24. Port Connectivity Checks: "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD"
+ 25. Port Connectivity Checks: "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_Q_shift_setlsb:Quotient_reg"
+ 26. Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S4_done"
+ 27. Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S3_shift"
+ 28. Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S2_add"
+ 29. Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S1_sub"
+ 30. Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S0_init"
+ 31. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit0FF"
+ 32. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit1FF"
+ 33. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit2FF"
+ 34. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit3FF"
+ 35. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt"
+ 36. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|enARdFF_2:Q1ff"
+ 37. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b0FF"
+ 38. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b1FF"
+ 39. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b2FF"
+ 40. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b3FF"
+ 41. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b0FF"
+ 42. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b1FF"
+ 43. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b2FF"
+ 44. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:msbFF"
+ 45. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux0"
+ 46. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux1"
+ 47. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux2"
+ 48. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux3"
+ 49. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD"
+ 50. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:lsb"
+ 51. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:ssb"
+ 52. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:tsb"
+ 53. Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:msb"
+ 54. Port Connectivity Checks: "fourBitComparator:inst3|oneBitComparator:comp3"
+ 55. Elapsed Time Per Partition
+ 56. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Nov 09 21:27:07 2025           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; lab2                                            ;
+; Top-level Entity Name              ; ALU                                             ;
+; Family                             ; Cyclone IV E                                    ;
+; Total logic elements               ; 123                                             ;
+;     Total combinational functions  ; 102                                             ;
+;     Dedicated logic registers      ; 71                                              ;
+; Total registers                    ; 71                                              ;
+; Total pins                         ; 23                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                                      ; ALU                ; lab2               ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                                       ;
++-------------------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path          ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                                                                                                    ; Library ;
++-------------------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; full_adder.vhd                            ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/full_adder.vhd                                                                                                                               ;         ;
+; RippleAdder.vhd                           ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/RippleAdder.vhd                                                                                                                              ;         ;
+; adder_subtractor.vhd                      ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/adder_subtractor.vhd                                                                                                                         ;         ;
+; enardFF_2.vhd                             ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/enardFF_2.vhd                                                                                                                                ;         ;
+; fourbitregister.vhd                       ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/fourbitregister.vhd                                                                                                                          ;         ;
+; MUX2_1.vhd                                ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/MUX2_1.vhd                                                                                                                                   ;         ;
+; Mux4_1.vhd                                ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/Mux4_1.vhd                                                                                                                                   ;         ;
+; Right_Shift_four_Bit_Register.vhd         ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/Right_Shift_four_Bit_Register.vhd                                                                                                            ;         ;
+; fourBitRegister_LoadHoldDec.vhd           ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/fourBitRegister_LoadHoldDec.vhd                                                                                                              ;         ;
+; Booth_Datapath.vhd                        ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/Booth_Datapath.vhd                                                                                                                           ;         ;
+; Multiplication.bdf                        ; yes             ; User Block Diagram/Schematic File  ; H:/lab2_ceg3155_v2/Multiplication.bdf                                                                                                                           ;         ;
+; Logical_Right_Shift_four_bit_register.vhd ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/Logical_Right_Shift_four_bit_register.vhd                                                                                                    ;         ;
+; ALU.bdf                                   ; yes             ; User Block Diagram/Schematic File  ; H:/lab2_ceg3155_v2/ALU.bdf                                                                                                                                      ;         ;
+; onebitcomparator.vhd                      ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/onebitcomparator.vhd                                                                                                                         ;         ;
+; fourBitComparator.vhd                     ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/fourBitComparator.vhd                                                                                                                        ;         ;
+; eightBitRegister.vhd                      ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/eightBitRegister.vhd                                                                                                                         ;         ;
+; Mux4_1_8bits.vhd                          ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/Mux4_1_8bits.vhd                                                                                                                             ;         ;
+; Multiplication_Control_Logic_One_Hot.vhd  ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/Multiplication_Control_Logic_One_Hot.vhd                                                                                                     ;         ;
+; RippleAdder_Fivebit.vhd                   ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/RippleAdder_Fivebit.vhd                                                                                                                      ;         ;
+; adder_subtractor_5bit.vhd                 ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/adder_subtractor_5bit.vhd                                                                                                                    ;         ;
+; StartPulse_OnReset.vhd                    ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/StartPulse_OnReset.vhd                                                                                                                       ;         ;
+; reg4_divisor_mag.vhd                      ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/reg4_divisor_mag.vhd                                                                                                                         ;         ;
+; reg5_R_shift.vhd                          ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/reg5_R_shift.vhd                                                                                                                             ;         ;
+; reg4_Q_shift_setlsb.vhd                   ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/reg4_Q_shift_setlsb.vhd                                                                                                                      ;         ;
+; sign_applyR5_to4.vhd                      ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/sign_applyR5_to4.vhd                                                                                                                         ;         ;
+; sign_applyQ4.vhd                          ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/sign_applyQ4.vhd                                                                                                                             ;         ;
+; dec_counter4.vhd                          ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/dec_counter4.vhd                                                                                                                             ;         ;
+; Non_Restoring_Datapath.vhd                ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/Non_Restoring_Datapath.vhd                                                                                                                   ;         ;
+; Division_non_restoring.bdf                ; yes             ; User Block Diagram/Schematic File  ; H:/lab2_ceg3155_v2/Division_non_restoring.bdf                                                                                                                   ;         ;
+; Non_Restoring_Controller.vhd              ; yes             ; User VHDL File                     ; H:/lab2_ceg3155_v2/Non_Restoring_Controller.vhd                                                                                                                 ;         ;
+; lpm_constant1.vhd                         ; yes             ; Auto-Found Wizard-Generated File   ; H:/lab2_ceg3155_v2/lpm_constant1.vhd                                                                                                                            ;         ;
+; lpm_constant.tdf                          ; yes             ; Megafunction                       ; c:/programdata/app-v/42a7790a-e852-4fd0-a846-61fbcbd0279a/f6001447-9727-4074-b939-1c3d5bbc9b4c/root/quartus_ii/quartus/libraries/megafunctions/lpm_constant.tdf ;         ;
++-------------------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                ;
++---------------------------------------------+--------------+
+; Resource                                    ; Usage        ;
++---------------------------------------------+--------------+
+; Estimated Total logic elements              ; 123          ;
+;                                             ;              ;
+; Total combinational functions               ; 102          ;
+; Logic element usage by number of LUT inputs ;              ;
+;     -- 4 input functions                    ; 66           ;
+;     -- 3 input functions                    ; 24           ;
+;     -- <=2 input functions                  ; 12           ;
+;                                             ;              ;
+; Logic elements by mode                      ;              ;
+;     -- normal mode                          ; 102          ;
+;     -- arithmetic mode                      ; 0            ;
+;                                             ;              ;
+; Total registers                             ; 71           ;
+;     -- Dedicated logic registers            ; 71           ;
+;     -- I/O registers                        ; 0            ;
+;                                             ;              ;
+; I/O pins                                    ; 23           ;
+; Embedded Multiplier 9-bit elements          ; 0            ;
+; Maximum fan-out node                        ; GReset~input ;
+; Maximum fan-out                             ; 73           ;
+; Total fan-out                               ; 664          ;
+; Average fan-out                             ; 3.03         ;
++---------------------------------------------+--------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                  ;
++--------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                             ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                              ; Library Name ;
++--------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+--------------+
+; |ALU                                                   ; 102 (4)           ; 71 (0)       ; 0           ; 0            ; 0       ; 0         ; 23   ; 0            ; |ALU                                                                                                                             ; work         ;
+;    |Division_non_restoring:inst1|                      ; 46 (0)            ; 33 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1                                                                                                ; work         ;
+;       |Non_Restoring_Controller:c1|                    ; 5 (5)             ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Controller:c1                                                                    ; work         ;
+;       |Non_Restoring_Datapath:inst|                    ; 41 (1)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst                                                                    ; work         ;
+;          |adder_subtractor_5bit:U_ADD|                 ; 8 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD                                        ; work         ;
+;             |RippleAdder_Fivebit:RP|                   ; 7 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP                 ; work         ;
+;                |full_adder:FA_0|                       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_0 ; work         ;
+;                |full_adder:FA_1|                       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_1 ; work         ;
+;                |full_adder:FA_2|                       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_2 ; work         ;
+;                |full_adder:FA_3|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP|full_adder:FA_3 ; work         ;
+;          |dec_counter4:N_cnt|                          ; 4 (4)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|dec_counter4:N_cnt                                                 ; work         ;
+;          |reg4_Q_shift_setlsb:Quotient_reg|            ; 8 (8)             ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_Q_shift_setlsb:Quotient_reg                                   ; work         ;
+;          |reg4_divisor_mag:D_reg|                      ; 3 (3)             ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_divisor_mag:D_reg                                             ; work         ;
+;          |reg5_R_shift:Remain_reg|                     ; 9 (9)             ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg5_R_shift:Remain_reg                                            ; work         ;
+;          |sign_applyQ4:Q_reg_sign|                     ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|sign_applyQ4:Q_reg_sign                                            ; work         ;
+;          |sign_applyR5_to4:R_reg_sign|                 ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|sign_applyR5_to4:R_reg_sign                                        ; work         ;
+;    |Multiplication:inst2|                              ; 30 (0)            ; 30 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2                                                                                                        ; work         ;
+;       |Booth_Datapath:inst5|                           ; 24 (0)            ; 25 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5                                                                                   ; work         ;
+;          |Logical_Right_Shift_four_bit_register:Q_reg| ; 5 (0)             ; 4 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg                                       ; work         ;
+;             |Mux4_1:b0MUX|                             ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b0MUX                          ; work         ;
+;                |Mux2_1:Mux2_1_3|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b0MUX|Mux2_1:Mux2_1_3          ; work         ;
+;             |Mux4_1:b1MUX|                             ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b1MUX                          ; work         ;
+;                |Mux2_1:Mux2_1_3|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b1MUX|Mux2_1:Mux2_1_3          ; work         ;
+;             |Mux4_1:b2MUX|                             ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b2MUX                          ; work         ;
+;                |Mux2_1:Mux2_1_3|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b2MUX|Mux2_1:Mux2_1_3          ; work         ;
+;             |Mux4_1:b3MUX|                             ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b3MUX                          ; work         ;
+;                |Mux2_1:Mux2_1_3|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|Mux4_1:b3MUX|Mux2_1:Mux2_1_3          ; work         ;
+;             |enARdFF_2:b0FF|                           ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b0FF                        ; work         ;
+;             |enARdFF_2:b1FF|                           ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b1FF                        ; work         ;
+;             |enARdFF_2:b2FF|                           ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b2FF                        ; work         ;
+;             |enARdFF_2:b3FF|                           ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b3FF                        ; work         ;
+;          |Mux2_1:A_mux0|                               ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux0                                                                     ; work         ;
+;          |Mux2_1:A_mux1|                               ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux1                                                                     ; work         ;
+;          |Mux2_1:A_mux2|                               ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux2                                                                     ; work         ;
+;          |Right_Shift_four_bit_register:A_reg|         ; 3 (0)             ; 4 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg                                               ; work         ;
+;             |enARdFF_2:b0FF|                           ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b0FF                                ; work         ;
+;             |enARdFF_2:b1FF|                           ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b1FF                                ; work         ;
+;             |enARdFF_2:b2FF|                           ; 2 (2)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b2FF                                ; work         ;
+;             |enARdFF_2:msbFF|                          ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:msbFF                               ; work         ;
+;          |adder_subtractor:U_ADD|                      ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD                                                            ; work         ;
+;             |RippleAdder:RP|                           ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP                                             ; work         ;
+;                |full_adder:FA_1|                       ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP|full_adder:FA_1                             ; work         ;
+;                |full_adder:FA_2|                       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP|full_adder:FA_2                             ; work         ;
+;                |full_adder:FA_3|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD|RippleAdder:RP|full_adder:FA_3                             ; work         ;
+;          |enARdFF_2:Q1ff|                              ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|enARdFF_2:Q1ff                                                                    ; work         ;
+;          |fourBitRegister:M_reg|                       ; 0 (0)             ; 4 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg                                                             ; work         ;
+;             |enARdFF_2:lsb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:lsb                                               ; work         ;
+;             |enARdFF_2:msb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:msb                                               ; work         ;
+;             |enARdFF_2:ssb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:ssb                                               ; work         ;
+;             |enARdFF_2:tsb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:tsb                                               ; work         ;
+;          |fourBitRegister:ProdHi|                      ; 0 (0)             ; 4 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi                                                            ; work         ;
+;             |enARdFF_2:lsb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi|enARdFF_2:lsb                                              ; work         ;
+;             |enARdFF_2:msb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi|enARdFF_2:msb                                              ; work         ;
+;             |enARdFF_2:ssb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi|enARdFF_2:ssb                                              ; work         ;
+;             |enARdFF_2:tsb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdHi|enARdFF_2:tsb                                              ; work         ;
+;          |fourBitRegister:ProdLo|                      ; 0 (0)             ; 4 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo                                                            ; work         ;
+;             |enARdFF_2:lsb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo|enARdFF_2:lsb                                              ; work         ;
+;             |enARdFF_2:msb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo|enARdFF_2:msb                                              ; work         ;
+;             |enARdFF_2:ssb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo|enARdFF_2:ssb                                              ; work         ;
+;             |enARdFF_2:tsb|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:ProdLo|enARdFF_2:tsb                                              ; work         ;
+;          |fourBitRegister_LoadHoldDec:N_cnt|           ; 6 (0)             ; 4 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt                                                 ; work         ;
+;             |Mux4_1:bit0MUX|                           ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit0MUX                                  ; work         ;
+;                |Mux2_1:Mux2_1_1|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit0MUX|Mux2_1:Mux2_1_1                  ; work         ;
+;             |Mux4_1:bit1MUX|                           ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit1MUX                                  ; work         ;
+;                |Mux2_1:Mux2_1_3|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit1MUX|Mux2_1:Mux2_1_3                  ; work         ;
+;             |Mux4_1:bit2MUX|                           ; 2 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit2MUX                                  ; work         ;
+;                |Mux2_1:Mux2_1_3|                       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit2MUX|Mux2_1:Mux2_1_3                  ; work         ;
+;             |Mux4_1:bit3MUX|                           ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit3MUX                                  ; work         ;
+;                |Mux2_1:Mux2_1_3|                       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|Mux4_1:bit3MUX|Mux2_1:Mux2_1_3                  ; work         ;
+;             |enARdFF_2:bit0FF|                         ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit0FF                                ; work         ;
+;             |enARdFF_2:bit1FF|                         ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit1FF                                ; work         ;
+;             |enARdFF_2:bit2FF|                         ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit2FF                                ; work         ;
+;             |enARdFF_2:bit3FF|                         ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit3FF                                ; work         ;
+;       |Multiplication_Control_Logic_One_Hot:inst|      ; 6 (6)             ; 5 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst                                                              ; work         ;
+;          |enARdFF_2:S0_init|                           ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S0_init                                            ; work         ;
+;          |enARdFF_2:S1_sub|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S1_sub                                             ; work         ;
+;          |enARdFF_2:S2_add|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S2_add                                             ; work         ;
+;          |enARdFF_2:S3_shift|                          ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S3_shift                                           ; work         ;
+;          |enARdFF_2:S4_done|                           ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S4_done                                            ; work         ;
+;    |Mux4_1_8bits:inst22|                               ; 11 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Mux4_1_8bits:inst22                                                                                                         ; work         ;
+;       |Mux2_1:\gen_bits:0:Mux2_1_3k|                   ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:0:Mux2_1_3k                                                                            ; work         ;
+;       |Mux2_1:\gen_bits:1:Mux2_1_3k|                   ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:1:Mux2_1_3k                                                                            ; work         ;
+;       |Mux2_1:\gen_bits:2:Mux2_1_3k|                   ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:2:Mux2_1_3k                                                                            ; work         ;
+;       |Mux2_1:\gen_bits:3:Mux2_1_3k|                   ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:3:Mux2_1_3k                                                                            ; work         ;
+;       |Mux2_1:\gen_bits:4:Mux2_1_3k|                   ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:4:Mux2_1_3k                                                                            ; work         ;
+;       |Mux2_1:\gen_bits:5:Mux2_1_3k|                   ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:5:Mux2_1_3k                                                                            ; work         ;
+;       |Mux2_1:\gen_bits:7:Mux2_1_3k|                   ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:7:Mux2_1_3k                                                                            ; work         ;
+;    |adder_subtractor:inst|                             ; 10 (1)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|adder_subtractor:inst                                                                                                       ; work         ;
+;       |RippleAdder:RP|                                 ; 9 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|adder_subtractor:inst|RippleAdder:RP                                                                                        ; work         ;
+;          |full_adder:FA_0|                             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|adder_subtractor:inst|RippleAdder:RP|full_adder:FA_0                                                                        ; work         ;
+;          |full_adder:FA_1|                             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|adder_subtractor:inst|RippleAdder:RP|full_adder:FA_1                                                                        ; work         ;
+;          |full_adder:FA_2|                             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|adder_subtractor:inst|RippleAdder:RP|full_adder:FA_2                                                                        ; work         ;
+;          |full_adder:FA_3|                             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|adder_subtractor:inst|RippleAdder:RP|full_adder:FA_3                                                                        ; work         ;
+;    |eightBitRegister:inst5|                            ; 0 (0)             ; 8 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5                                                                                                      ; work         ;
+;       |enARdFF_2:bit0|                                 ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5|enARdFF_2:bit0                                                                                       ; work         ;
+;       |enARdFF_2:bit1|                                 ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5|enARdFF_2:bit1                                                                                       ; work         ;
+;       |enARdFF_2:bit2|                                 ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5|enARdFF_2:bit2                                                                                       ; work         ;
+;       |enARdFF_2:bit3|                                 ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5|enARdFF_2:bit3                                                                                       ; work         ;
+;       |enARdFF_2:bit4|                                 ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5|enARdFF_2:bit4                                                                                       ; work         ;
+;       |enARdFF_2:bit5|                                 ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5|enARdFF_2:bit5                                                                                       ; work         ;
+;       |enARdFF_2:bit6|                                 ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5|enARdFF_2:bit6                                                                                       ; work         ;
+;       |enARdFF_2:bit7|                                 ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|eightBitRegister:inst5|enARdFF_2:bit7                                                                                       ; work         ;
+;    |fourBitComparator:inst4|                           ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|fourBitComparator:inst4                                                                                                     ; work         ;
+;       |oneBitComparator:comp2|                         ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU|fourBitComparator:inst4|oneBitComparator:comp2                                                                              ; work         ;
++--------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                            ;
++--------+--------------+---------+--------------+--------------+---------------------------+--------------------------------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance           ; IP Include File                      ;
++--------+--------------+---------+--------------+--------------+---------------------------+--------------------------------------+
+; Altera ; LPM_CONSTANT ; N/A     ; N/A          ; N/A          ; |ALU|lpm_constant1:inst8  ; H:/lab2_ceg3155_v2/lpm_constant1.vhd ;
+; Altera ; LPM_CONSTANT ; N/A     ; N/A          ; N/A          ; |ALU|lpm_constant1:inst10 ; H:/lab2_ceg3155_v2/lpm_constant1.vhd ;
++--------+--------------+---------+--------------+--------------+---------------------------+--------------------------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------+
+; State Machine - |ALU|Division_non_restoring:inst1|Non_Restoring_Controller:c1|cur                              ;
++---------------+--------------+------------+------------+---------------+--------------+-------------+----------+
+; Name          ; cur.S5_LATCH ; cur.S4_FIX ; cur.S3_DEC ; cur.S2_DECIDE ; cur.S1_SHIFT ; cur.S0_INIT ; cur.IDLE ;
++---------------+--------------+------------+------------+---------------+--------------+-------------+----------+
+; cur.IDLE      ; 0            ; 0          ; 0          ; 0             ; 0            ; 0           ; 0        ;
+; cur.S0_INIT   ; 0            ; 0          ; 0          ; 0             ; 0            ; 1           ; 1        ;
+; cur.S1_SHIFT  ; 0            ; 0          ; 0          ; 0             ; 1            ; 0           ; 1        ;
+; cur.S2_DECIDE ; 0            ; 0          ; 0          ; 1             ; 0            ; 0           ; 1        ;
+; cur.S3_DEC    ; 0            ; 0          ; 1          ; 0             ; 0            ; 0           ; 1        ;
+; cur.S4_FIX    ; 0            ; 1          ; 0          ; 0             ; 0            ; 0           ; 1        ;
+; cur.S5_LATCH  ; 1            ; 0          ; 0          ; 0             ; 0            ; 0           ; 1        ;
++---------------+--------------+------------+------------+---------------+--------------+-------------+----------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                                                        ;
++--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
+; Register name                                                                        ; Reason for Removal                                                                                 ;
++--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
+; StartPulse_OnReset:inst12|resetBar_d                                                 ; Merged with Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S0_init|int_q ;
+; Division_non_restoring:inst1|Non_Restoring_Datapath:inst|dec_counter4:N_cnt|r_cnt[3] ; Stuck at GND due to stuck port data_in                                                             ;
+; Total Number of Removed Registers = 2                                                ;                                                                                                    ;
++--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 71    ;
+; Number of registers using Synchronous Clear  ; 5     ;
+; Number of registers using Synchronous Load   ; 7     ;
+; Number of registers using Asynchronous Clear ; 71    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 40    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------+
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b0FF|int_q ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |ALU|Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b2FF|int_q         ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_Q_shift_setlsb:Quotient_reg|r_mag[2]         ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg5_R_shift:Remain_reg|r[4]                      ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |ALU|Division_non_restoring:inst1|Non_Restoring_Datapath:inst|dec_counter4:N_cnt|r_cnt[0]                       ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |ALU|Mux4_1_8bits:inst22|Mux2_1:\gen_bits:1:Mux2_1_3k|o_val                                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: lpm_constant1:inst8|lpm_constant:LPM_CONSTANT_component ;
++--------------------+------------------+--------------------------------------------------------------+
+; Parameter Name     ; Value            ; Type                                                         ;
++--------------------+------------------+--------------------------------------------------------------+
+; LPM_WIDTH          ; 4                ; Signed Integer                                               ;
+; LPM_CVALUE         ; 4                ; Signed Integer                                               ;
+; ENABLE_RUNTIME_MOD ; NO               ; Untyped                                                      ;
+; CBXI_PARAMETER     ; lpm_constant_ae6 ; Untyped                                                      ;
++--------------------+------------------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: lpm_constant1:inst10|lpm_constant:LPM_CONSTANT_component ;
++--------------------+------------------+---------------------------------------------------------------+
+; Parameter Name     ; Value            ; Type                                                          ;
++--------------------+------------------+---------------------------------------------------------------+
+; LPM_WIDTH          ; 4                ; Signed Integer                                                ;
+; LPM_CVALUE         ; 4                ; Signed Integer                                                ;
+; ENABLE_RUNTIME_MOD ; NO               ; Untyped                                                       ;
+; CBXI_PARAMETER     ; lpm_constant_ae6 ; Untyped                                                       ;
++--------------------+------------------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit0"                                                                     ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit1"                                                                     ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit2"                                                                     ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit3"                                                                     ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit4"                                                                     ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit5"                                                                     ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit6"                                                                     ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "eightBitRegister:inst5|enARdFF_2:bit7"                                                                     ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|dec_counter4:N_cnt"        ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; o_q  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD"      ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; i_b_v[4]    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; o_carry_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; o_zero      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_Q_shift_setlsb:Quotient_reg" ;
++---------+-------+----------+------------------------------------------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                                                  ;
++---------+-------+----------+------------------------------------------------------------------------------------------+
+; i_clear ; Input ; Info     ; Stuck at GND                                                                             ;
++---------+-------+----------+------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S4_done"       ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; o_qbar   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S3_shift"      ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; o_qbar   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S2_add"        ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; o_qbar   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S1_sub"        ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; o_qbar   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst|enARdFF_2:S0_init"       ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; i_d      ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; o_q      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit0FF"                ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit1FF"                ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit2FF"                ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt|enARdFF_2:bit3FF"                ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt"           ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; o_value ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|enARdFF_2:Q1ff"                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b0FF"        ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b1FF"        ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b2FF"        ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg|enARdFF_2:b3FF"        ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b0FF"                ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b1FF"                ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:b2FF"                ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|enARdFF_2:msbFF"               ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_enable ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_qbar   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux0" ;
++---------+-------+----------+--------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                ;
++---------+-------+----------+--------------------------------------------------------+
+; i_val_1 ; Input ; Info     ; Stuck at GND                                           ;
++---------+-------+----------+--------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux1" ;
++---------+-------+----------+--------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                ;
++---------+-------+----------+--------------------------------------------------------+
+; i_val_1 ; Input ; Info     ; Stuck at GND                                           ;
++---------+-------+----------+--------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux2" ;
++---------+-------+----------+--------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                ;
++---------+-------+----------+--------------------------------------------------------+
+; i_val_1 ; Input ; Info     ; Stuck at GND                                           ;
++---------+-------+----------+--------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|Mux2_1:A_mux3" ;
++---------+-------+----------+--------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                ;
++---------+-------+----------+--------------------------------------------------------+
+; i_val_1 ; Input ; Info     ; Stuck at GND                                           ;
++---------+-------+----------+--------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|adder_subtractor:U_ADD"                          ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; o_carry_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:lsb"                             ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:ssb"                             ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:tsb"                             ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:msb"                             ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; o_qbar ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------+
+; Port Connectivity Checks: "fourBitComparator:inst3|oneBitComparator:comp3" ;
++--------------+-------+----------+------------------------------------------+
+; Port         ; Type  ; Severity ; Details                                  ;
++--------------+-------+----------+------------------------------------------+
+; i_gtprevious ; Input ; Info     ; Stuck at GND                             ;
+; i_ltprevious ; Input ; Info     ; Stuck at GND                             ;
++--------------+-------+----------+------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Sun Nov 09 21:26:56 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab2 -c lab2
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file full_adder.vhd
+    Info (12022): Found design unit 1: full_adder-rtl
+    Info (12023): Found entity 1: full_adder
+Info (12021): Found 2 design units, including 1 entities, in source file rippleadder.vhd
+    Info (12022): Found design unit 1: RippleAdder-rtl
+    Info (12023): Found entity 1: RippleAdder
+Info (12021): Found 2 design units, including 1 entities, in source file adder_subtractor.vhd
+    Info (12022): Found design unit 1: adder_subtractor-rtl
+    Info (12023): Found entity 1: adder_subtractor
+Info (12021): Found 2 design units, including 1 entities, in source file enabledsrlatch.vhd
+    Info (12022): Found design unit 1: enabledSRLatch-rtl
+    Info (12023): Found entity 1: enabledSRLatch
+Info (12021): Found 2 design units, including 1 entities, in source file enardff_2.vhd
+    Info (12022): Found design unit 1: enARdFF_2-rtl
+    Info (12023): Found entity 1: enARdFF_2
+Info (12021): Found 2 design units, including 1 entities, in source file fourbitregister.vhd
+    Info (12022): Found design unit 1: fourBitRegister-rtl
+    Info (12023): Found entity 1: fourBitRegister
+Info (12021): Found 2 design units, including 1 entities, in source file mux2_1.vhd
+    Info (12022): Found design unit 1: Mux2_1-rtl
+    Info (12023): Found entity 1: Mux2_1
+Info (12021): Found 2 design units, including 1 entities, in source file mux4_1.vhd
+    Info (12022): Found design unit 1: Mux4_1-rtl
+    Info (12023): Found entity 1: Mux4_1
+Info (12021): Found 2 design units, including 1 entities, in source file right_shift_four_bit_register.vhd
+    Info (12022): Found design unit 1: Right_Shift_four_bit_register-rtl
+    Info (12023): Found entity 1: Right_Shift_four_bit_register
+Info (12021): Found 2 design units, including 1 entities, in source file fourbitregister_loadholddec.vhd
+    Info (12022): Found design unit 1: fourBitRegister_LoadHoldDec-rtl
+    Info (12023): Found entity 1: fourBitRegister_LoadHoldDec
+Info (12021): Found 2 design units, including 1 entities, in source file booth_datapath.vhd
+    Info (12022): Found design unit 1: Booth_Datapath-rtl
+    Info (12023): Found entity 1: Booth_Datapath
+Info (12021): Found 2 design units, including 1 entities, in source file boothctrl_onehot.vhd
+    Info (12022): Found design unit 1: BoothCtrl_OneHot-rtl
+    Info (12023): Found entity 1: BoothCtrl_OneHot
+Info (12021): Found 1 design units, including 1 entities, in source file multiplication.bdf
+    Info (12023): Found entity 1: Multiplication
+Info (12021): Found 2 design units, including 1 entities, in source file logical_right_shift_four_bit_register.vhd
+    Info (12022): Found design unit 1: Logical_Right_Shift_four_bit_register-rtl
+    Info (12023): Found entity 1: Logical_Right_Shift_four_bit_register
+Info (12021): Found 1 design units, including 1 entities, in source file alu.bdf
+    Info (12023): Found entity 1: ALU
+Info (12021): Found 2 design units, including 1 entities, in source file onebitcomparator.vhd
+    Info (12022): Found design unit 1: oneBitComparator-rtl
+    Info (12023): Found entity 1: oneBitComparator
+Info (12021): Found 2 design units, including 1 entities, in source file fourbitcomparator.vhd
+    Info (12022): Found design unit 1: fourBitComparator-rtl
+    Info (12023): Found entity 1: fourBitComparator
+Info (12021): Found 2 design units, including 1 entities, in source file eightbitregister.vhd
+    Info (12022): Found design unit 1: eightBitRegister-rtl
+    Info (12023): Found entity 1: eightBitRegister
+Info (12021): Found 2 design units, including 1 entities, in source file mux4_1_8bits.vhd
+    Info (12022): Found design unit 1: Mux4_1_8bits-rtl
+    Info (12023): Found entity 1: Mux4_1_8bits
+Info (12021): Found 2 design units, including 1 entities, in source file multiplication_control_logic_one_hot.vhd
+    Info (12022): Found design unit 1: Multiplication_Control_Logic_One_Hot-rtl
+    Info (12023): Found entity 1: Multiplication_Control_Logic_One_Hot
+Info (12021): Found 2 design units, including 1 entities, in source file fourbitregister_signhandling.vhd
+    Info (12022): Found design unit 1: fourBitRegister_SignHandling-rtl
+    Info (12023): Found entity 1: fourBitRegister_SignHandling
+Info (12021): Found 2 design units, including 1 entities, in source file fivebitregister_signhandling_r.vhd
+    Info (12022): Found design unit 1: fiveBitRegister_SignHandling_R-rtl
+    Info (12023): Found entity 1: fiveBitRegister_SignHandling_R
+Info (12021): Found 2 design units, including 1 entities, in source file rippleadder_fivebit.vhd
+    Info (12022): Found design unit 1: RippleAdder_Fivebit-rtl
+    Info (12023): Found entity 1: RippleAdder_Fivebit
+Info (12021): Found 2 design units, including 1 entities, in source file adder_subtractor_5bit.vhd
+    Info (12022): Found design unit 1: adder_subtractor_5bit-rtl
+    Info (12023): Found entity 1: adder_subtractor_5bit
+Info (12021): Found 2 design units, including 1 entities, in source file logical_left_shift_fivebit_withmag.vhd
+    Info (12022): Found design unit 1: Logical_Left_Shift_FiveBit_withMag-rtl
+    Info (12023): Found entity 1: Logical_Left_Shift_FiveBit_withMag
+Info (12021): Found 2 design units, including 1 entities, in source file arithmetic_left_shift_q_four_bit_register.vhd
+    Info (12022): Found design unit 1: Arithmetic_Left_Shift_Q_four_bit_register-rtl
+    Info (12023): Found entity 1: Arithmetic_Left_Shift_Q_four_bit_register
+Info (12021): Found 2 design units, including 1 entities, in source file d_abs_register_4.vhd
+    Info (12022): Found design unit 1: D_Abs_Register_4-rtl
+    Info (12023): Found entity 1: D_Abs_Register_4
+Info (12021): Found 2 design units, including 1 entities, in source file startpulse_onreset.vhd
+    Info (12022): Found design unit 1: StartPulse_OnReset-rtl
+    Info (12023): Found entity 1: StartPulse_OnReset
+Info (12021): Found 2 design units, including 1 entities, in source file reg4_divisor_mag.vhd
+    Info (12022): Found design unit 1: reg4_divisor_mag-rtl
+    Info (12023): Found entity 1: reg4_divisor_mag
+Info (12021): Found 2 design units, including 1 entities, in source file reg5_r_shift.vhd
+    Info (12022): Found design unit 1: reg5_R_shift-rtl
+    Info (12023): Found entity 1: reg5_R_shift
+Info (12021): Found 2 design units, including 1 entities, in source file reg4_q_shift_setlsb.vhd
+    Info (12022): Found design unit 1: reg4_Q_shift_setlsb-rtl
+    Info (12023): Found entity 1: reg4_Q_shift_setlsb
+Info (12021): Found 2 design units, including 1 entities, in source file sign_applyr5_to4.vhd
+    Info (12022): Found design unit 1: sign_applyR5_to4-rtl
+    Info (12023): Found entity 1: sign_applyR5_to4
+Info (12021): Found 2 design units, including 1 entities, in source file sign_applyq4.vhd
+    Info (12022): Found design unit 1: sign_applyQ4-rtl
+    Info (12023): Found entity 1: sign_applyQ4
+Info (12021): Found 2 design units, including 1 entities, in source file dec_counter4.vhd
+    Info (12022): Found design unit 1: dec_counter4-rtl
+    Info (12023): Found entity 1: dec_counter4
+Info (12021): Found 2 design units, including 1 entities, in source file non_restoring_datapath.vhd
+    Info (12022): Found design unit 1: Non_Restoring_Datapath-rtl
+    Info (12023): Found entity 1: Non_Restoring_Datapath
+Info (12021): Found 2 design units, including 1 entities, in source file non_restoring_control_logic_one_hot.vhd
+    Info (12022): Found design unit 1: Non_Restoring_Control_Logic_One_Hot-rtl
+    Info (12023): Found entity 1: Non_Restoring_Control_Logic_One_Hot
+Info (12021): Found 1 design units, including 1 entities, in source file division_non_restoring.bdf
+    Info (12023): Found entity 1: Division_non_restoring
+Info (12021): Found 2 design units, including 1 entities, in source file non_restoring_controller.vhd
+    Info (12022): Found design unit 1: Non_Restoring_Controller-rtl
+    Info (12023): Found entity 1: Non_Restoring_Controller
+Info (12127): Elaborating entity "ALU" for the top level hierarchy
+Info (12128): Elaborating entity "adder_subtractor" for hierarchy "adder_subtractor:inst"
+Info (12128): Elaborating entity "RippleAdder" for hierarchy "adder_subtractor:inst|RippleAdder:RP"
+Info (12128): Elaborating entity "full_adder" for hierarchy "adder_subtractor:inst|RippleAdder:RP|full_adder:FA_0"
+Info (12128): Elaborating entity "fourBitComparator" for hierarchy "fourBitComparator:inst3"
+Info (12128): Elaborating entity "oneBitComparator" for hierarchy "fourBitComparator:inst3|oneBitComparator:comp3"
+Info (12128): Elaborating entity "Mux4_1_8bits" for hierarchy "Mux4_1_8bits:inst22"
+Info (12128): Elaborating entity "Mux2_1" for hierarchy "Mux4_1_8bits:inst22|Mux2_1:\gen_bits:7:Mux2_1_1k"
+Info (12128): Elaborating entity "Multiplication" for hierarchy "Multiplication:inst2"
+Info (12128): Elaborating entity "Booth_Datapath" for hierarchy "Multiplication:inst2|Booth_Datapath:inst5"
+Warning (10036): Verilog HDL or VHDL warning at Booth_Datapath.vhd(128): object "add_co" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Booth_Datapath.vhd(132): object "N_val" assigned a value but never read
+Info (12128): Elaborating entity "fourBitRegister" for hierarchy "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg"
+Info (12128): Elaborating entity "enARdFF_2" for hierarchy "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister:M_reg|enARdFF_2:msb"
+Info (12128): Elaborating entity "Right_Shift_four_bit_register" for hierarchy "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg"
+Info (12128): Elaborating entity "Mux4_1" for hierarchy "Multiplication:inst2|Booth_Datapath:inst5|Right_Shift_four_bit_register:A_reg|Mux4_1:msbMUX"
+Info (12128): Elaborating entity "Logical_Right_Shift_four_bit_register" for hierarchy "Multiplication:inst2|Booth_Datapath:inst5|Logical_Right_Shift_four_bit_register:Q_reg"
+Info (12128): Elaborating entity "fourBitRegister_LoadHoldDec" for hierarchy "Multiplication:inst2|Booth_Datapath:inst5|fourBitRegister_LoadHoldDec:N_cnt"
+Info (12128): Elaborating entity "Multiplication_Control_Logic_One_Hot" for hierarchy "Multiplication:inst2|Multiplication_Control_Logic_One_Hot:inst"
+Warning (12125): Using design file lpm_constant1.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: lpm_constant1-SYN
+    Info (12023): Found entity 1: lpm_constant1
+Info (12128): Elaborating entity "lpm_constant1" for hierarchy "lpm_constant1:inst8"
+Info (12128): Elaborating entity "lpm_constant" for hierarchy "lpm_constant1:inst8|lpm_constant:LPM_CONSTANT_component"
+Info (12130): Elaborated megafunction instantiation "lpm_constant1:inst8|lpm_constant:LPM_CONSTANT_component"
+Info (12133): Instantiated megafunction "lpm_constant1:inst8|lpm_constant:LPM_CONSTANT_component" with the following parameter:
+    Info (12134): Parameter "lpm_cvalue" = "4"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "LPM_CONSTANT"
+    Info (12134): Parameter "lpm_width" = "4"
+Info (12128): Elaborating entity "Division_non_restoring" for hierarchy "Division_non_restoring:inst1"
+Info (12128): Elaborating entity "Non_Restoring_Controller" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Controller:c1"
+Info (12128): Elaborating entity "Non_Restoring_Datapath" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst"
+Warning (10036): Verilog HDL or VHDL warning at Non_Restoring_Datapath.vhd(159): object "add_co" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Non_Restoring_Datapath.vhd(160): object "add_zero" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Non_Restoring_Datapath.vhd(162): object "N_val" assigned a value but never read
+Info (12128): Elaborating entity "reg4_divisor_mag" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_divisor_mag:D_reg"
+Info (12128): Elaborating entity "reg5_R_shift" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg5_R_shift:Remain_reg"
+Info (12128): Elaborating entity "reg4_Q_shift_setlsb" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|reg4_Q_shift_setlsb:Quotient_reg"
+Info (12128): Elaborating entity "adder_subtractor_5bit" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD"
+Info (12128): Elaborating entity "RippleAdder_Fivebit" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|adder_subtractor_5bit:U_ADD|RippleAdder_Fivebit:RP"
+Info (12128): Elaborating entity "dec_counter4" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|dec_counter4:N_cnt"
+Info (12128): Elaborating entity "sign_applyQ4" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|sign_applyQ4:Q_reg_sign"
+Info (12128): Elaborating entity "sign_applyR5_to4" for hierarchy "Division_non_restoring:inst1|Non_Restoring_Datapath:inst|sign_applyR5_to4:R_reg_sign"
+Info (12128): Elaborating entity "StartPulse_OnReset" for hierarchy "StartPulse_OnReset:inst12"
+Info (12128): Elaborating entity "eightBitRegister" for hierarchy "eightBitRegister:inst5"
+Warning (12241): 24 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 155 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 12 input pins
+    Info (21059): Implemented 11 output pins
+    Info (21061): Implemented 132 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 8 warnings
+    Info: Peak virtual memory: 4717 megabytes
+    Info: Processing ended: Sun Nov 09 21:27:07 2025
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:10
+
+

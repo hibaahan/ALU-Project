@@ -1,0 +1,46 @@
+ibrary ieee;
+use ieee.std_logic_1164.all;
+
+entity Non_Restoring_Datapath is
+  port (
+    -- global
+    i_clock     : in  std_logic;
+    i_resetBar  : in  std_logic;
+
+    -- external operands
+    i_Multi : in  std_logic_vector(3 downto 0); -- M
+    i_Multiplier   : in  std_logic_vector(3 downto 0); -- Q
+
+    -- control from controller
+    -- M register
+    ctrl_loadM       : in  std_logic;                   -- 1=load M from i_Multiplicand
+    -- A register (Right_Shift)
+    ctrl_selA_1      : in  std_logic;                   -- A: 00 hold, 01 load, 1X shift
+    ctrl_selA_0      : in  std_logic;
+    ctrl_A_load_zero : in  std_logic;                   -- 1: load 0000 into A (clear A), 0: load adder result
+    -- Q register (Right_Shift)
+    ctrl_selQ_1      : in  std_logic;                   -- Q: 00 hold, 01 load, 1X shift
+    ctrl_selQ_0      : in  std_logic;
+    -- Q1 FF
+    ctrl_enQ1        : in  std_logic;                   -- usually '1'; can gate if desired
+    -- Add/Sub
+    ctrl_sub         : in  std_logic;                   -- 0:add (A+M), 1:sub (A-M) -> maps to adder carry_in
+    -- Counter N (load then decrement)
+    ctrl_selN_1      : in  std_logic;                   -- N: 00 hold, 01 load, 1X decrement
+    ctrl_selN_0      : in  std_logic;
+    i_N_init         : in  std_logic_vector(3 downto 0);-- will "0100" for 4 iterations
+    --Signal to only latch final product
+	 ctrl_latchProduct :in  std_logic;
+    -- status back to controller
+    o_lsbQ0             : out std_logic;                   -- Lsb 
+    o_FFQ1         : out std_logic;                      -- ff 
+    o_N_is_zero      : out std_logic;                   -- loop is done when counter is zero
+    o_A_zero         : out std_logic;                   -- optional (from A)
+    o_overflow       : out std_logic;                   -- from adder/sub (for debug)
+    -- product view (optional)
+    o_A              : out std_logic_vector(3 downto 0);
+    o_Q              : out std_logic_vector(3 downto 0);
+    o_Product        : out std_logic_vector(7 downto 0) -- concat A & Q
+	 --o_Done           : out std_logic
+  );
+end Booth_Datapath;

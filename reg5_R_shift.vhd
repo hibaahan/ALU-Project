@@ -1,0 +1,45 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- 5-bit accumulator R:
+-- - load (parallel)
+-- - clear
+-- - shift left logical with serial-in bit
+-- - exposes MSB (bit 4) for "R >= 0 ?" style decisions during the algorithm
+entity reg5_R_shift is
+  port(
+    i_clock   : in  std_logic;
+    i_resetBar  : in  std_logic;                       -- async active-low reset
+    i_clear    : in  std_logic;                       -- synchronous clear
+    i_load    : in  std_logic;                       -- synchronous load
+    i_shift   : in  std_logic;                       -- shift-left enable
+    i_sin     : in  std_logic;                       -- serial-in for bit0 after shift
+    i_D       : in  std_logic_vector(4 downto 0);    -- parallel load value
+    o_Q       : out std_logic_vector(4 downto 0);    -- R contents
+    o_msb     : out std_logic                        -- R(4)
+  );
+end entity;
+
+architecture rtl of reg5_R_shift is
+  signal r : std_logic_vector(4 downto 0) := (others => '0');
+begin
+  process( i_clock ,    i_resetBar )
+  begin
+    if    i_resetBar = '0' then
+      r <= (others => '0');
+    elsif rising_edge( i_clock) then
+      if i_clear  = '1' then
+        r <= (others => '0');
+      elsif i_load = '1' then
+        r <= i_D;
+      elsif i_shift = '1' then
+        -- logical left: bit4 drops, shift left, bring in i_sin at bit0
+        r <= r(3 downto 0) & i_sin;
+      end if;
+    end if;
+  end process;
+
+  o_Q   <= r;
+  o_msb <= r(4);
+end architecture;

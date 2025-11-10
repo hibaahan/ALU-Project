@@ -1,0 +1,30 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity sign_applyR5_to4 is
+  port(
+    i_R5_mag : in  std_logic_vector(4 downto 0);  -- |R| (5-bit internal)
+    i_neg    : in  std_logic;                     -- 1 => negative remainder
+    o_R4_signed  : out std_logic_vector(3 downto 0)   -- 4-bit two's-comp remainder result
+  );
+end entity;
+
+architecture rtl of sign_applyR5_to4 is
+begin
+  process(i_R5_mag, i_neg)
+    variable m5  : unsigned(4 downto 0);
+    variable m4s : signed(3 downto 0);
+    variable res : signed(3 downto 0);
+  begin
+    m5  := unsigned(i_R5_mag);
+    -- drop the MSB gracefully to 4 bits for the reported remainder
+    m4s := signed(std_logic_vector(m5(3 downto 0)));
+    if i_neg = '1' then
+      res := -m4s;
+    else
+      res := m4s;
+    end if;
+    o_R4_signed <= std_logic_vector(res);
+  end process;
+end architecture;

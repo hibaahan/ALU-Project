@@ -1,0 +1,151 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II 64-Bit
+# Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+# Date created = 15:52:08  October 06, 2025
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		lab2_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE115F29C7
+set_global_assignment -name TOP_LEVEL_ENTITY ALU
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "15:52:08  OCTOBER 06, 2025"
+set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
+set_global_assignment -name VHDL_FILE full_adder.vhd
+set_global_assignment -name VHDL_FILE RippleAdder.vhd
+set_global_assignment -name VHDL_FILE adder_subtractor.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE TEST.vwf
+set_global_assignment -name SIMULATION_MODE FUNCTIONAL
+set_global_assignment -name VHDL_FILE enabledsrlatch.vhd
+set_global_assignment -name VHDL_FILE enardFF_2.vhd
+set_global_assignment -name VHDL_FILE fourbitregister.vhd
+set_global_assignment -name VHDL_FILE MUX2_1.vhd
+set_global_assignment -name VHDL_FILE Mux4_1.vhd
+set_global_assignment -name VHDL_FILE Right_Shift_four_Bit_Register.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE Testrightsgiftregister.vwf
+set_global_assignment -name VHDL_FILE fourBitRegister_LoadHoldDec.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE TestdecrementRegister.vwf
+set_global_assignment -name VECTOR_OUTPUT_FORMAT VWF
+set_global_assignment -name VHDL_FILE Booth_Datapath.vhd
+set_global_assignment -name VHDL_FILE BoothCtrl_OneHot.vhd
+set_global_assignment -name BDF_FILE Multiplication.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Testmultiplication.vwf
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
+set_global_assignment -name VHDL_FILE Logical_Right_Shift_four_bit_register.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE multiplicationtest.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE atestingMul2.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE testingg.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
+set_global_assignment -name BDF_FILE ALU.bdf
+set_global_assignment -name VHDL_FILE onebitcomparator.vhd
+set_global_assignment -name VHDL_FILE fourBitComparator.vhd
+set_global_assignment -name VHDL_FILE eightBitRegister.vhd
+set_global_assignment -name VHDL_FILE Mux4_1_8bits.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform1alu.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE aluTesting.vwf
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_location_assignment PIN_F15 -to CarryOut
+set_location_assignment PIN_AB28 -to GReset
+set_location_assignment PIN_AB27 -to OperandA[3]
+set_location_assignment PIN_AD27 -to OperandA[2]
+set_location_assignment PIN_AC27 -to OperandA[1]
+set_location_assignment PIN_AC28 -to OperandA[0]
+set_location_assignment PIN_AC25 -to OperandB[3]
+set_location_assignment PIN_AB26 -to OperandB[2]
+set_location_assignment PIN_AD26 -to OperandB[1]
+set_location_assignment PIN_AC26 -to OperandB[0]
+set_location_assignment PIN_AC24 -to OpSel[1]
+set_location_assignment PIN_AB25 -to OpSel[0]
+set_location_assignment PIN_H19 -to OUT[7]
+set_location_assignment PIN_J19 -to OUT[6]
+set_location_assignment PIN_E18 -to OUT[5]
+set_location_assignment PIN_F18 -to OUT[4]
+set_location_assignment PIN_F21 -to OUT[3]
+set_location_assignment PIN_E19 -to OUT[2]
+set_location_assignment PIN_F19 -to OUT[1]
+set_location_assignment PIN_G19 -to OUT[0]
+set_location_assignment PIN_G15 -to OverflowOut
+set_location_assignment PIN_G16 -to ZeroOut
+set_location_assignment PIN_Y2 -to GClock
+set_global_assignment -name VECTOR_WAVEFORM_FILE output_files/Waveform89.vwf
+set_global_assignment -name VHDL_FILE Multiplication_Control_Logic_One_Hot.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE multiplicationtest_v2.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE testingMultiplication.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE testingmull.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test5.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE test6.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE testingRihtSgift.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE tewst7.vwf
+set_global_assignment -name VHDL_FILE fourBitRegister_SignHandling.vhd
+set_global_assignment -name VHDL_FILE fiveBitRegister_SignHandling_R.vhd
+set_global_assignment -name VHDL_FILE RippleAdder_Fivebit.vhd
+set_global_assignment -name VHDL_FILE adder_subtractor_5bit.vhd
+set_global_assignment -name VHDL_FILE Logical_Left_Shift_FiveBit_withMag.vhd
+set_global_assignment -name VHDL_FILE Arithmetic_Left_Shift_Q_four_bit_register.vhd
+set_global_assignment -name VHDL_FILE D_Abs_Register_4.vhd
+set_global_assignment -name VHDL_FILE StartPulse_OnReset.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform1.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform2.vwf
+set_global_assignment -name VHDL_FILE reg4_divisor_mag.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE simulation/qsim/Testingreg4division.vwf
+set_global_assignment -name VHDL_FILE reg5_R_shift.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE simulation/qsim/Testingreg5Rwithshiftleft.vwf
+set_global_assignment -name VHDL_FILE reg4_Q_shift_setlsb.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE simulation/testingQregzitharitmeticshiftandtomagandsetlsb.vwf
+set_global_assignment -name VHDL_FILE sign_applyR5_to4.vhd
+set_global_assignment -name VHDL_FILE sign_applyQ4.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE simulation/qsim/TestingSignHandlingQRegister.vwf
+set_global_assignment -name VHDL_FILE dec_counter4.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE simulation/qsim/TestingDecrement.vwf
+set_global_assignment -name VHDL_FILE Non_Restoring_Datapath.vhd
+set_global_assignment -name VHDL_FILE Non_Restoring_Control_Logic_One_Hot.vhd
+set_global_assignment -name BDF_FILE Division_non_restoring.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform3.vwf
+set_global_assignment -name VHDL_FILE Non_Restoring_Controller.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform4.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform5.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform6.vwf
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform7.vwf
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "H:/lab2_ceg3155_v2/Waveform7.vwf"

@@ -1,0 +1,10 @@
+
+State Machine - |ALU|Division_non_restoring:inst1|Non_Restoring_Controller:c1|cur
+Name cur.S5_LATCH cur.S4_FIX cur.S3_DEC cur.S2_DECIDE cur.S1_SHIFT cur.S0_INIT cur.IDLE 
+cur.IDLE 0 0 0 0 0 0 0 
+cur.S0_INIT 0 0 0 0 0 1 1 
+cur.S1_SHIFT 0 0 0 0 1 0 1 
+cur.S2_DECIDE 0 0 0 1 0 0 1 
+cur.S3_DEC 0 0 1 0 0 0 1 
+cur.S4_FIX 0 1 0 0 0 0 1 
+cur.S5_LATCH 1 0 0 0 0 0 1 

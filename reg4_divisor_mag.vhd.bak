@@ -1,0 +1,43 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- Loads a 4-bit signed value and stores ONLY its magnitude (abs).
+-- Outputs the 4-bit magnitude; also exposes the detected sign if you want it.
+entity reg4_divisor_mag is
+  port(
+    i_clk    : in  std_logic;
+    i_rst_n  : in  std_logic;                       -- async active-low reset
+    i_load   : in  std_logic;                       -- load enables magnitude capture
+    i_D_signed : in  std_logic_vector(3 downto 0);  -- signed dividend/divisor input (two's comp)
+    o_D_mag  : out std_logic_vector(3 downto 0);    -- |D|
+    o_D_sign : out std_logic                        -- 1 if input was negative, else 0
+  );
+end entity;
+
+architecture rtl of reg4_divisor_mag is
+  signal r_mag  : unsigned(3 downto 0) := (others => '0');
+  signal r_sign : std_logic := '0';
+begin
+  process(i_clk, i_rst_n)
+    variable s : signed(3 downto 0);
+  begin
+    if i_rst_n = '0' then
+      r_mag  <= (others => '0');
+      r_sign <= '0';
+    elsif rising_edge(i_clk) then
+      if i_load = '1' then
+        s := signed(i_D_signed);
+        r_sign <= s(3);
+        if s(3) = '1' then
+          r_mag <= unsigned(-s);   -- abs(s)
+        else
+          r_mag <= unsigned(s);
+        end if;
+      end if;
+    end if;
+  end process;
+
+  o_D_mag  <= std_logic_vector(r_mag);
+  o_D_sign <= r_sign;
+end architecture;
