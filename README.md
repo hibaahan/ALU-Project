@@ -17,7 +17,7 @@ This project implements a **4-bit signed Arithmetic Logic Unit (ALU)** featuring
 This ALU was built as part of the digital design/FPGA development curriculum and demonstrates mastery in:
 
 - VHDL RTL coding  
-- FSM (Finite-State Machine) design  
+- ASM design  
 - Control/Datapath separation  
 - Signed arithmetic handling  
 - FPGA implementation and waveform debugging  
@@ -26,20 +26,31 @@ This ALU was built as part of the digital design/FPGA development curriculum and
 
 ---
 
-## 🧩 Architecture
+**🧩 Architecture**
+✅ 1. Datapath Components
+The ALU datapath is composed of:
+2-to-1 Multiplexers — select the arithmetic operation based on control bits (00 → Addition, 01 → Subtraction, 10 → Multiplication, 11 → Division).
+Full Adder/Subtractor — designed using a ripple-carry chain with a carry-in signal. The operation mode is determined by Cin:
+Cin = 0 → Addition
+Cin = 1 → Subtraction (performs two’s complement on operand B via B XOR Cin)
+Booth Multiplier — implemented using the Arithmetic Booth’s Algorithm for signed multiplication. The design was developed by first studying the algorithm, building a graph representation, then creating the datapath and control logic. The algorithm performs arithmetic shifts based on the current and previous least-significant bits of the multiplier to handle signed numbers efficiently.
+Non-Restoring Divider — chosen for its efficiency in signed division. It performs left shifts and makes decisions based on the sign of the remainder after each iteration. The algorithm was analyzed and translated into a structural datapath and control logic diagram before implementation.
+Registers and Logic Units:
+Q: 4-bit Arithmetic Left-Shift Register (Multiplier/Quotient)
+R: 4-bit Remainder Register
+D: 4-bit Divisor Register
+Sign Logic: Handles magnitude extraction and final sign correction after unsigned operations.
+Down Counter: Controls iteration cycles for multiplication/division.
 
-### ✅ **1. Datapath Components**
+<img width="996" height="504" alt="ALU_TopEntity" src="https://github.com/user-attachments/assets/65f13aad-0124-4e2c-822d-f67e43c26559" />
 
-** screenshot of the compenent**
-The datapath is composed of:
 
-- **4-bit Arithmetic Left Shift Register (Q)**  
-- **4-bit Remainder Register (R)**  
-- **4-bit Divisor Register (D)**  
-- **Sign logic (magnitude extraction + final sign correction)**  
-- **Adder/Subtractor**  
-- **Multiplexers for selecting Add / Sub / Load / Clear**  
-- **Down-counter for iteration control**  
+
+
+**⚙️ Design Methodology**
+To demonstrate proficiency in both structural and behavioral VHDL:
+Structural VHDL was used for the Booth multiplier and Adder/Subtractor, showcasing detailed understanding of hardware architecture and signal-level design.
+Behavioral VHDL was used for the Non-Restoring Divider, since it required more complex sign handling. The algorithm itself works on unsigned magnitudes, so signs were separated, magnitudes processed, and results re-signed at the end.
 
 ### ✅ **2. Controller (FSM)**
 A dedicated finite-state machine orchestrates:
@@ -56,14 +67,22 @@ A dedicated finite-state machine orchestrates:
 ## ✳️ Features
 
 ### 🔹 **Booth Multiplication**
+
+
+<img width="996" height="504" alt="Capture d’écran 2025-11-12 à 15 11 04" src="https://github.com/user-attachments/assets/a139c040-0cb5-4b7b-bb86-a56cfe47f525" />
+
+implemented both data path and control logic in vhdl 
+
 Implements **signed Booth’s algorithm** using:
 
-- Q and Q(-1) pair detection  
+- Q and Q(-1) pair detection ( current and previous bit ) 
 - Add/Sub/Shift logic  
 - 4 cycles for a 4-bit operation  
 - Handles negative operands via Booth’s encoding  
 
 ### 🔹 **Non-Restoring Division**
+<img width="997" height="503" alt="Capture d’écran 2025-11-12 à 15 14 32" src="https://github.com/user-attachments/assets/521ec23f-9a65-45ce-9095-5ff663e8a68b" />
+
 Implements signed division:
 
 - Initialize registers (Q, R, D)  
@@ -71,6 +90,10 @@ Implements signed division:
 - Final correction for negative remainder  
 
 ### 🔹 **4-Bit Signed Addition/Subtraction**
+
+<img width="247" height="171" alt="Capture d’écran 2025-11-12 à 15 16 25" src="https://github.com/user-attachments/assets/59867543-6e70-4705-8ab0-caa727fb839f" />
+
+
 - Ripple-carry design  
 - Two’s complement handling  
 - Zero, negative, overflow flags (optional extension)
@@ -87,7 +110,7 @@ ALU-Project/
 ├── Arithmetic_Left_Shift_Q... # Q shift register
 ├── Non_Restoring_Controller.vhd # Division FSM
 ├── Non_Restoring_Datapath.vhd # Division datapath
-│
+├── Other smaller entities usedn in data path (other registers - multiplexer )
 ├── simulation/ # Testbenches and waveforms
 ├── output_files/ # Quartus build outputs
 ├── incremental_db/ # Compilation database
@@ -102,14 +125,67 @@ ALU-Project/
 ### ✅ **Waveform Verification**
 All operations were verified in ModelSim/Quartus simulation:
 
+<img width="1440" height="587" alt="Capture d’écran 2025-11-12 à 15 25 49" src="https://github.com/user-attachments/assets/c0835190-ae84-423c-b557-0e13577472ca" />
+
+As you can see :opsel=10 (multiplication)
+               :OperandA=1011 (-5)
+               :operandB=1101  (-3)
+               :result =00001111 (15)
+
+<img width="1440" height="587" alt="Capture d’écran 2025-11-12 à 15 29 57" src="https://github.com/user-attachments/assets/274f2b61-dca6-4b34-a1b9-eb1ae16f370d" />
+
+As you can see :opsel=10 (multiplication)
+               :OperandA=0101 (5)
+               :operandB=1101  (-3)
+               :result =11110001(-15)
+
+<img width="1440" height="648" alt="Capture d’écran 2025-11-12 à 15 33 14" src="https://github.com/user-attachments/assets/c1d6dc54-236c-4bd1-8aeb-f3c8707c823c" />
+
+As you can see :opsel=11 (division)
+               :OperandA=0111 (7)
+               :operandB=0010  (2)
+               :result =00110001 (Q=0011=3 ,R=0001=1)
+
+<img width="1440" height="648" alt="Capture d’écran 2025-11-12 à 15 40 52" src="https://github.com/user-attachments/assets/727b14ad-8912-4368-9dd6-d518cb3a2e70" />
+
+As you can see :opsel=11 (division)
+               :OperandA=1011 (-5)
+               :operandB=1111  (-1)
+               :result =01010000 (Q=0101=5,R=0000= 0 )
+
+<img width="1440" height="648" alt="Capture d’écran 2025-11-12 à 15 48 40" src="https://github.com/user-attachments/assets/e66c6464-f758-4e97-bfa4-dbfe61e5e472" />
+
+As you can see :opsel=00 (addition)
+               :OperandA=1000 (-8)
+               :operandB=1111  (-1)
+               :result =000001111(Result is 111 but we have overflow=1 and carryout =1 )
+               
+<img width="1440" height="648" alt="Capture d’écran 2025-11-12 à 15 52 15" src="https://github.com/user-attachments/assets/8080fdfb-8377-469b-badb-b16899d9cda0" />
+
+As you can see :opsel=01 (subtraction)
+               :OperandA=0100 (4)
+               :operandB=0001  (1)
+               :result =000000011(Result is 1 but carryout =1 )
+
+<img width="1440" height="585" alt="Capture d’écran 2025-11-12 à 16 07 14" src="https://github.com/user-attachments/assets/34f8a978-4075-4c0d-b335-f5812d2895cf" /> 
+
+As you can see :opsel=00 (addition)
+               :OperandA=1011 (-5)
+               :operandB=0101  (5)
+               :result =000000000(Result is 0 but Zeroout is 1  carryout is 1)
+
+
 - Multiplication cycles (Booth encoding visible)
 - Division cycles (R add/sub + decision)
 - Final correction applied correctly
 - Signed edge cases tested:
-  - `−8 × −3`
-  - `5 × −3`
-  - `−7 ÷ 3`
-  - `6 ÷ −2`
+  - `−5 × −3`  (first picture)✅
+  - `5 × −3`   (second picture)✅
+  - `7 ÷ 2`    (third picture)✅
+  - `-5 ÷ −1`(fourth picture)✅
+  - -8-1     (fifth picture)
+  - 4-1      (sixth picture)
+  - -5+5     (seventh picture)
 
 ### ✅ **FPGA Testing (DE2-115)**
 The ALU was synthesized and implemented on the Altera DE2-115 board.  
@@ -117,23 +193,7 @@ Switches were used for inputs, and LEDs for result display.
 
 ---
 
-## ✅ Example Test Cases
 
-### 🔸 Booth Multiplication
-| A (4-bit) | B (4-bit) | Expected |
-|-----------|-----------|----------|
-| 0101 (5)  | 0011 (3)  | 1111 1111 (15) |
-| 1101 (-3) | 0011 (3)  | 1110 1111 (-9) |
-| 1001 (-7) | 1010 (-6) | 0010 1010 (42) |
-
-### 🔸 Non-Restoring Division
-| Dividend | Divisor | Quotient | Remainder |
-|----------|----------|----------|-----------|
-| 0101 (5) | 0011 (3) | 0001     | 0010      |
-| 1101 (-3)| 0011 (3) | 1111     | 0000      |
-| 0110 (6) | 1110 (-2)| 1101     | 0000      |
-
----
 
 ## 🛠️ Tools Used
 - **Quartus II 13.0 / 18.1**
