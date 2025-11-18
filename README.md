@@ -1,7 +1,18 @@
 # 🔢 Advanced 4-Bit ALU  
 ### **Booth Multiplier + Non-Restoring Divider + Adder/Subtractor**  
 **Fully designed, simulated, and implemented on the Altera DE2-115 FPGA**
-
+⭐ Why This Project Matters (For ASIC/FPGA Roles)
+This project demonstrates industry-level RTL design skills directly relevant to:
+Key strengths of this ALU:
+✔️ Full RTL datapath + controller architecture
+✔️ Synthesizable, multi-cycle arithmetic units
+✔️ Hierarchical VHDL modules (adder, multiplier, divider, shift registers…)
+✔️ FSM sequencing, one-hot encoding for control
+✔️ Signed arithmetic handling (magnitude extraction, recombination)
+✔️ Testbench-driven verification with ModelSim/Quartus
+✔️ Hardware bring-up on DE2-115 FPGA
+✔️ Waveform debugging for corner cases
+✔️ Algorithmic hardware design (Booth & Non-restoring)
 ---
 
 ## 🚀 Overview
